@@ -1,8 +1,8 @@
-############
-Node Client
-############
+###########
+Tag Client
+###########
 
-.. autoclass:: evclient.node_client.NodeClient
+.. autoclass:: evclient.tag_client.TagClient
     :show-inheritance:
     :inherited-members:
     :special-members: __init__

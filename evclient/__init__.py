@@ -5,6 +5,7 @@ from .base_client import BaseClient
 from .client import EVClient
 from .csv_import_client import CSVImportClient
 from .node_client import NodeClient
+from .tag_client import TagClient
 from .exceptions import (
     EVBadRequestException,
     EVUnauthorizedException,
@@ -24,6 +25,10 @@ from .types.node_types import (
     DeviceType,
     NodeType,
     NodeResponse
+)
+from .types.tag_types import (
+    TagType,
+    TagResponse
 )
 
 logging.getLogger(__name__).addHandler(logging.NullHandler())
