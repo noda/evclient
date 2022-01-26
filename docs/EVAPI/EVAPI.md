@@ -86,7 +86,7 @@ Some `4xx` errors that could be handled programmatically can include an
 error code that briefly explains the error reported.
 
   -----------------------------------------------------------------------
-  Attributes     
+  Attributes
   -------------- --------------------------------------------------------
   **type**\      The type of error returned. One of api_connection_error,
   string\        api_error, authentication_error, invalid_request_error
@@ -94,11 +94,11 @@ error code that briefly explains the error reported.
 
   **code**\      For some errors that could be handled programmatically,
   string\        a short string indicating the error code reported.
-  *always*\      
+  *always*\
 
   **doc_url**\   A URL to more information about the error code reported.
-  string\        
-  *optional*\    
+  string\
+  *optional*\
 
   **error**\     A human-readable message providing more details about
   string\        the error. Sometimes, these messages can be shown to
@@ -448,7 +448,7 @@ curl -s \
                 121
             ],
             "interval": 600
-        }       
+        }
     ]
 }
 ```
@@ -521,7 +521,7 @@ The response is an JSON objects on the format;
             "postfix": "C",
             "protocol_id": 1
         },
-        ...     
+        ...
     ]
 }
 ```
@@ -636,7 +636,7 @@ Perform a `GET` request and the following parameters to the endpoint
 
 ``` bash
 # GET /domain/api/v1/settings/{type}/{id}
-# Using cURL CLI 
+# Using cURL CLI
 curl -s \
 -H 'Accept: application/json' \
 -H 'Authorization: Key 0123456789abcdef0123456789abcdef' \
@@ -700,7 +700,7 @@ Perform a `PUT` request and the following parameters to the endpoint
 
 ``` bash
 # PUT /domain/api/v1/settings/{type}/{id}
-# Using cURL CLI 
+# Using cURL CLI
 curl -s \
 -H 'Accept: application/json' \
 -H 'Authorization: Key 0123456789abcdef0123456789abcdef' \
@@ -839,7 +839,7 @@ Perform a `GET` request with the following attributes to the endpoint
 
 ``` bash
 # GET /domain/api/v1/timeseries
-# Using cURL CLI 
+# Using cURL CLI
 curl -s \
 -H 'Accept: application/json' \
 -H 'Authorization: Key 0123456789abcdef0123456789abcdef' \
@@ -896,7 +896,7 @@ attributes to the endpoint `/*domain*/api/v1/timeseries`.
 
 ``` bash
 # POST /domain/api/v1/timeseries
-# Using cURL CLI 
+# Using cURL CLI
 curl -s \
 -H 'Accept: application/json' \
 -H 'Authorization: Key 0123456789abcdef0123456789abcdef' \
@@ -963,7 +963,7 @@ attributes to the endpoint `/*domain*/api/v1/timeseries`.
 
 ``` bash
 # POST /domain/api/v1/timeseries
-# Using cURL CLI 
+# Using cURL CLI
 curl -s \
 -H 'Accept: application/json' \
 -H 'Authorization: Key 0123456789abcdef0123456789abcdef' \
@@ -1050,7 +1050,7 @@ The following attributes are supplied in the body.
 
 ``` bash
 # PUT /domain/api/v1/network_manager/{id}/scenarios
-# Using cURL CLI 
+# Using cURL CLI
 curl -s \
 -H 'Accept: application/json' \
 -H 'Authorization: Key 0123456789abcdef0123456789abcdef' \
