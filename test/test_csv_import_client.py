@@ -4,7 +4,7 @@ import unittest
 
 from typing import TextIO
 
-from evclient import CSVImportClient, CSVImportResponseType
+from evclient import CSVImportClient, CSVImportResponse
 
 
 class TestCSVImportClient(unittest.TestCase):
@@ -24,7 +24,7 @@ class TestCSVImportClient(unittest.TestCase):
 
     @responses.activate
     def test_get_csv_imports(self) -> None:
-        mock_response: CSVImportResponseType = {
+        mock_response: CSVImportResponse = {
             'integrations': [
                 {
                     'uuid': '945978fd-bd61-4d83-a1e4-02ef89d60987',
@@ -44,7 +44,7 @@ class TestCSVImportClient(unittest.TestCase):
                 status=200
             )
 
-            res: CSVImportResponseType = self.client.get_csv_imports()
+            res: CSVImportResponse = self.client.get_csv_imports()
 
             self.assertEqual(res, mock_response)
             self.assertEqual(len(responses.calls), 1)

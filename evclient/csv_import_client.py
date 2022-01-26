@@ -1,7 +1,10 @@
+import requests
 from typing import TextIO
 
-from .types.csv_import_types import CSVImportResponseType
+from .types.csv_import_types import CSVImportResponse
 from .base_client import BaseClient
+
+Response = requests.models.Response
 
 
 class CSVImportClient(BaseClient):
@@ -13,11 +16,11 @@ class CSVImportClient(BaseClient):
         super().__init__(domain, api_key)
         self._api_path: str = 'csvimport'
 
-    def get_csv_imports(self) -> CSVImportResponseType:
+    def get_csv_imports(self) -> CSVImportResponse:
         """Fetches all existing csv import definitions from EnergyView API
 
         Returns:
-            :class:`.CSVImportResponseType`
+            :class:`.CSVImportResponse`
 
         Raises:
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
@@ -27,7 +30,7 @@ class CSVImportClient(BaseClient):
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
                                         from fulfilling the request.
         """
-        response = self._session.get(
+        response: Response = self._session.get(
             url=f'{self._url}/{self._api_path}'
         )
         return self._process_response(response)
@@ -48,7 +51,7 @@ class CSVImportClient(BaseClient):
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
                                         from fulfilling the request.
         """
-        response = self._session.post(
+        response: Response = self._session.post(
             url=f'{self._url}/{self._api_path}/{import_uuid}',
             files={'file': csv_file}
         )
