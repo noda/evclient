@@ -6,6 +6,7 @@ from .client import EVClient
 from .csv_import_client import CSVImportClient
 from .node_client import NodeClient
 from .tag_client import TagClient
+from .settings_client import SettingsClient
 from .exceptions import (
     EVBadRequestException,
     EVUnauthorizedException,
