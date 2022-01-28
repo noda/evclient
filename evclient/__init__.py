@@ -7,6 +7,7 @@ from .csv_import_client import CSVImportClient
 from .node_client import NodeClient
 from .tag_client import TagClient
 from .settings_client import SettingsClient
+from .timeseries_client import TimeseriesClient
 from .exceptions import (
     EVBadRequestException,
     EVUnauthorizedException,
@@ -30,6 +31,12 @@ from .types.node_types import (
 from .types.tag_types import (
     TagType,
     TagResponse
+)
+from .types.timeseries_types import (
+    TimeseriesDataType,
+    TimeseriesType,
+    TimeseriesResponse,
+    TimeseriesDataResponse
 )
 
 logging.getLogger(__name__).addHandler(logging.NullHandler())
