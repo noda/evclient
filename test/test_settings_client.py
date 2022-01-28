@@ -1,7 +1,7 @@
 import responses
 import unittest
 import urllib
-from typing import Dict
+from typing import Dict, Union
 
 from evclient import SettingsClient
 
@@ -90,7 +90,7 @@ class TestSettingsClient(unittest.TestCase):
         )
 
         with self.subTest('call successful with complete parameter list and force param is True'):
-            params: Dict[str, str] = {
+            params: Dict[str, Union[str, bool]] = {
                 'path': 'coco',
                 'value': '1',
                 'force': True
