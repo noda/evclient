@@ -8,6 +8,7 @@ from .node_client import NodeClient
 from .tag_client import TagClient
 from .settings_client import SettingsClient
 from .timeseries_client import TimeseriesClient
+from .dataset_client import DatasetClient
 from .exceptions import (
     EVBadRequestException,
     EVUnauthorizedException,
@@ -38,5 +39,6 @@ from .types.timeseries_types import (
     TimeseriesResponse,
     TimeseriesDataResponse
 )
+from .types.dataset_types import DatasetType
 
 logging.getLogger(__name__).addHandler(logging.NullHandler())

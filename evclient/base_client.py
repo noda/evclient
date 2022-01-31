@@ -107,7 +107,7 @@ class BaseClient:
             try:
                 return response.json()
             except json.decoder.JSONDecodeError:
-                return
+                return response.content or None
         elif 400 <= response.status_code < 500:
             raise responses[response.status_code]
         else:
