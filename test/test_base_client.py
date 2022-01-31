@@ -101,11 +101,20 @@ class TestBaseClient(unittest.TestCase):
             responses.add(
                 responses.GET,
                 url=client._base_url,
-                body='not valid json',
                 status=200
             )
             response: Response = requests.get(client._base_url)
             self.assertEqual(client._process_response(response), None)
+
+        with self.subTest('OK status code and returns content in bytes'):
+            responses.add(
+                responses.GET,
+                url=client._base_url,
+                body='not json, but valid body',
+                status=200
+            )
+            response: Response = requests.get(client._base_url)
+            self.assertEqual(client._process_response(response).decode('utf-8'), 'not json, but valid body')
 
         with self.subTest('Should raise PCTBadRequestException'):
             responses.add(responses.GET, url=client._base_url, status=400)
