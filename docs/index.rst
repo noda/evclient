@@ -1,5 +1,13 @@
 evclient's documentation
-=======================================
+========================
+
+Getting Started
+---------------
+
+.. toctree::
+   :maxdepth: 2
+
+   guide/index
 
 API Reference
 -------------
@@ -9,21 +17,20 @@ API Reference
 
    references/clients/index
 
-Types
--------------
-
 .. toctree::
    :maxdepth: 2
 
    references/types/index
 
-Exceptions
--------------
-
 .. toctree::
    :maxdepth: 2
 
    references/exceptions
+
+EV API Documentation
+====================
+
+`Link to PDF <_static/EVAPI.pdf>`_
 
 Indices and tables
 ==================
