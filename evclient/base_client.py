@@ -78,14 +78,14 @@ class BaseClient:
             response: requests.model.Response object
 
         Raises:
-            :class:`.EVBadRequestException: Sent request had insufficient data or invalid options.
-            :class:`.EVUnauthorizedException: Request was refused due to lacking authentication credentials.
-            :class:`.EVRequestFailedException: The parameters were valid but the request failed.
-            :class:`.EVForbiddenException: Server understands the request but refuses to authorize it.
-            :class:`.EVNotFoundException: The requested resource was not found.
-            :class:`.EVConflictException: The request conflicts with the current state of the target resource.
-            :class:`.EVTooManyRequestsException: Sent too many requests in a given amount of time.
-            :class:`.EVInternalServerException: Server encountered an unexpected condition that prevented it
+            :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
+            :class:`.EVUnauthorizedException`: Request was refused due to lacking authentication credentials.
+            :class:`.EVRequestFailedException`: The parameters were valid but the request failed.
+            :class:`.EVForbiddenException`: Server understands the request but refuses to authorize it.
+            :class:`.EVNotFoundException`: The requested resource was not found.
+            :class:`.EVConflictException`: The request conflicts with the current state of the target resource.
+            :class:`.EVTooManyRequestsException`: Sent too many requests in a given amount of time.
+            :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
                                         from fulfilling the request.
         """
         logger.debug(
