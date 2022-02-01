@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timeseries Types &mdash; evclient docs  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exceptions" href="../exceptions.html" />
+    <link rel="prev" title="Tag Types" href="tag_types.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> evclient docs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../guide/get_started.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../clients/index.html">API Reference</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Types</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="csv_import_types.html">CSV Import Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataset_types.html">Dataset Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="node_types.html">Node Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag_types.html">Tag Types</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Timeseries Types</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">evclient docs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Types</a> &raquo;</li>
+      <li>Timeseries Types</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/references/types/timeseries_types.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-evclient.types.timeseries_types">
+<span id="timeseries-types"></span><h1>Timeseries Types<a class="headerlink" href="#module-evclient.types.timeseries_types" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesDataResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.types.timeseries_types.</span></span><span class="sig-name descname"><span class="pre">TimeseriesDataResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesDataResponse" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesDataResponse.node_id">
+<span class="sig-name descname"><span class="pre">node_id</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesDataResponse.node_id" title="Permalink to this definition"></a></dt>
+<dd><p>Domain-unique id for the node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesDataResponse.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesDataResponse.tag" title="Permalink to this definition"></a></dt>
+<dd><p>The name of the tag / sensor as declared in EnergyView.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesDataResponse.v">
+<span class="sig-name descname"><span class="pre">v</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesDataResponse.v" title="Permalink to this definition"></a></dt>
+<dd><p>Value of the data point.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesDataResponse.ts">
+<span class="sig-name descname"><span class="pre">ts</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesDataResponse.ts" title="Permalink to this definition"></a></dt>
+<dd><p>Date time string on the format YYYY-MM-DDThh:mm:ss±hh:mm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesDataType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.types.timeseries_types.</span></span><span class="sig-name descname"><span class="pre">TimeseriesDataType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesDataType" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesDataType.v">
+<span class="sig-name descname"><span class="pre">v</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesDataType.v" title="Permalink to this definition"></a></dt>
+<dd><p>Value of the data point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesDataType.ts">
+<span class="sig-name descname"><span class="pre">ts</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesDataType.ts" title="Permalink to this definition"></a></dt>
+<dd><p>Date time string on the format YYYY-MM-DDThh:mm:ss±hh:mm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.types.timeseries_types.</span></span><span class="sig-name descname"><span class="pre">TimeseriesResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesResponse" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesResponse.timeseries">
+<span class="sig-name descname"><span class="pre">timeseries</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesResponse.timeseries" title="Permalink to this definition"></a></dt>
+<dd><p>Named wrapper attribute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#evclient.types.timeseries_types.TimeseriesType" title="evclient.types.timeseries_types.TimeseriesType">evclient.types.timeseries_types.TimeseriesType</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.types.timeseries_types.</span></span><span class="sig-name descname"><span class="pre">TimeseriesType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesType" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesType.node_id">
+<span class="sig-name descname"><span class="pre">node_id</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesType.node_id" title="Permalink to this definition"></a></dt>
+<dd><p>Domain-unique identifier for the node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesType.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesType.tag" title="Permalink to this definition"></a></dt>
+<dd><p>Name of the sensor for which the data belongs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesType.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesType.data" title="Permalink to this definition"></a></dt>
+<dd><p>A list (array) of data points as object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#evclient.types.timeseries_types.TimeseriesDataType" title="evclient.types.timeseries_types.TimeseriesDataType">evclient.types.timeseries_types.TimeseriesDataType</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tag_types.html" class="btn btn-neutral float-left" title="Tag Types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../exceptions.html" class="btn btn-neutral float-right" title="Exceptions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, NODA Intelligent Systems AB.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

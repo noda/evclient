@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSV Import Client &mdash; evclient docs  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Dataset Client" href="dataset_client.html" />
+    <link rel="prev" title="EVClient" href="client.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> evclient docs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../guide/get_started.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="base_client.html">Base Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client.html">EVClient</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">CSV Import Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataset_client.html">Dataset Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="node_client.html">Node Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings_client.html">Settings Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag_client.html">Tag Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeseries_client.html">Timeseries Client</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../types/index.html">Types</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">evclient docs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">API Reference</a> &raquo;</li>
+      <li>CSV Import Client</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/references/clients/csv_import_client.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="csv-import-client">
+<h1>CSV Import Client<a class="headerlink" href="#csv-import-client" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="evclient.csv_import_client.CSVImportClient">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.csv_import_client.</span></span><span class="sig-name descname"><span class="pre">CSVImportClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.csv_import_client.CSVImportClient" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_client.html#evclient.base_client.BaseClient" title="evclient.base_client.BaseClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">evclient.base_client.BaseClient</span></code></a></p>
+<p>A client for handling the csv import section of EnergyView API.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="evclient.csv_import_client.CSVImportClient.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.csv_import_client.CSVImportClient.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>BaseClient constructor</p>
+<p>Defines the base url and customer domain for the EnergyView API and sets headers in a new
+requests session.</p>
+<p>Will look for the following environment variables if parameters are omitted:</p>
+<p>EV_DOMAIN</p>
+<p>EV_API_KEY</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The EnergyView domain to make requests to.</p></li>
+<li><p><strong>api_key</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – API Key for the selected EnergyView domain.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVFatalErrorException" title="evclient.exceptions.EVFatalErrorException"><strong>EVFatalErrorException</strong></a> – The client could not find a specified domain
+    or api key for the EnergyView API</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="evclient.csv_import_client.CSVImportClient.get_csv_imports">
+<span class="sig-name descname"><span class="pre">get_csv_imports</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../types/csv_import_types.html#evclient.types.csv_import_types.CSVImportResponse" title="evclient.types.csv_import_types.CSVImportResponse"><span class="pre">evclient.types.csv_import_types.CSVImportResponse</span></a></span></span><a class="headerlink" href="#evclient.csv_import_client.CSVImportClient.get_csv_imports" title="Permalink to this definition"></a></dt>
+<dd><p>Fetches all existing csv import definitions from EnergyView API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../types/csv_import_types.html#evclient.types.csv_import_types.CSVImportResponse" title="evclient.types.csv_import_types.CSVImportResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">CSVImportResponse</span></code></a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVBadRequestException" title="evclient.exceptions.EVBadRequestException"><strong>EVBadRequestException</strong></a> – Sent request had insufficient data or invalid options.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVUnauthorizedException" title="evclient.exceptions.EVUnauthorizedException"><strong>EVUnauthorizedException</strong></a> – Request was refused due to lacking authentication credentials.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVForbiddenException" title="evclient.exceptions.EVForbiddenException"><strong>EVForbiddenException</strong></a> – Server understands the request but refuses to authorize it.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVTooManyRequestsException" title="evclient.exceptions.EVTooManyRequestsException"><strong>EVTooManyRequestsException</strong></a> – Sent too many requests in a given amount of time.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVInternalServerException" title="evclient.exceptions.EVInternalServerException"><strong>EVInternalServerException</strong></a> – Server encountered an unexpected condition that prevented it
+    from fulfilling the request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="evclient.csv_import_client.CSVImportClient.upload_csv_file">
+<span class="sig-name descname"><span class="pre">upload_csv_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">import_uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">csv_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TextIO</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#evclient.csv_import_client.CSVImportClient.upload_csv_file" title="Permalink to this definition"></a></dt>
+<dd><p>Upload a CSV file to the EnergyView API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>import_uuid</strong> (<em>str</em>) – The id of the csv import integration.</p></li>
+<li><p><strong>csv_file</strong> (<em>TextIO</em>) – The file to upload.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVBadRequestException" title="evclient.exceptions.EVBadRequestException"><strong>EVBadRequestException</strong></a> – Sent request had insufficient data or invalid options.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVUnauthorizedException" title="evclient.exceptions.EVUnauthorizedException"><strong>EVUnauthorizedException</strong></a> – Request was refused due to lacking authentication credentials.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVForbiddenException" title="evclient.exceptions.EVForbiddenException"><strong>EVForbiddenException</strong></a> – Server understands the request but refuses to authorize it.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVNotFoundException" title="evclient.exceptions.EVNotFoundException"><strong>EVNotFoundException</strong></a> – The requested resource was not found.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVTooManyRequestsException" title="evclient.exceptions.EVTooManyRequestsException"><strong>EVTooManyRequestsException</strong></a> – Sent too many requests in a given amount of time.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVInternalServerException" title="evclient.exceptions.EVInternalServerException"><strong>EVInternalServerException</strong></a> – Server encountered an unexpected condition that prevented it
+    from fulfilling the request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="client.html" class="btn btn-neutral float-left" title="EVClient" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dataset_client.html" class="btn btn-neutral float-right" title="Dataset Client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, NODA Intelligent Systems AB.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

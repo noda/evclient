@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dataset Client &mdash; evclient docs  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Node Client" href="node_client.html" />
+    <link rel="prev" title="CSV Import Client" href="csv_import_client.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> evclient docs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../guide/get_started.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="base_client.html">Base Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client.html">EVClient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv_import_client.html">CSV Import Client</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Dataset Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="node_client.html">Node Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings_client.html">Settings Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag_client.html">Tag Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeseries_client.html">Timeseries Client</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../types/index.html">Types</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">evclient docs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">API Reference</a> &raquo;</li>
+      <li>Dataset Client</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/references/clients/dataset_client.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dataset-client">
+<h1>Dataset Client<a class="headerlink" href="#dataset-client" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="evclient.dataset_client.DatasetClient">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.dataset_client.</span></span><span class="sig-name descname"><span class="pre">DatasetClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.dataset_client.DatasetClient" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_client.html#evclient.base_client.BaseClient" title="evclient.base_client.BaseClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">evclient.base_client.BaseClient</span></code></a></p>
+<p>A client for handling the dataset section of EnergyView API.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="evclient.dataset_client.DatasetClient.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.dataset_client.DatasetClient.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>BaseClient constructor</p>
+<p>Defines the base url and customer domain for the EnergyView API and sets headers in a new
+requests session.</p>
+<p>Will look for the following environment variables if parameters are omitted:</p>
+<p>EV_DOMAIN</p>
+<p>EV_API_KEY</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The EnergyView domain to make requests to.</p></li>
+<li><p><strong>api_key</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – API Key for the selected EnergyView domain.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVFatalErrorException" title="evclient.exceptions.EVFatalErrorException"><strong>EVFatalErrorException</strong></a> – The client could not find a specified domain
+    or api key for the EnergyView API</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="evclient.dataset_client.DatasetClient.create_dataset">
+<span class="sig-name descname"><span class="pre">create_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thing_uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../types/dataset_types.html#evclient.types.dataset_types.DatasetType" title="evclient.types.dataset_types.DatasetType"><span class="pre">evclient.types.dataset_types.DatasetType</span></a></span></span><a class="headerlink" href="#evclient.dataset_client.DatasetClient.create_dataset" title="Permalink to this definition"></a></dt>
+<dd><p>Create a dataset in EnergyView API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> (<em>str</em>) – The base64 encoded content of the object/file.</p></li>
+<li><p><strong>dataset_format</strong> (<em>str</em>) – One of csv, ini, json, misc, toml, xml, yaml.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the data set object.</p></li>
+<li><p><strong>tags</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Optional element used for filtering and identification. A list/array of strings.</p></li>
+<li><p><strong>thing_uuid</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional element used to bind a data set to a Node/Thing.
+Uses the globally unique identifier (UUID) of a Node/Thing.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><a class="reference internal" href="../types/dataset_types.html#evclient.types.dataset_types.DatasetType" title="evclient.types.dataset_types.DatasetType"><code class="xref py py-class docutils literal notranslate"><span class="pre">DatasetType</span></code></a></p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVBadRequestException" title="evclient.exceptions.EVBadRequestException"><strong>EVBadRequestException</strong></a> – Sent request had insufficient data or invalid options.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVUnauthorizedException" title="evclient.exceptions.EVUnauthorizedException"><strong>EVUnauthorizedException</strong></a> – Request was refused due to lacking authentication credentials.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVForbiddenException" title="evclient.exceptions.EVForbiddenException"><strong>EVForbiddenException</strong></a> – Server understands the request but refuses to authorize it.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVTooManyRequestsException" title="evclient.exceptions.EVTooManyRequestsException"><strong>EVTooManyRequestsException</strong></a> – Sent too many requests in a given amount of time.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVInternalServerException" title="evclient.exceptions.EVInternalServerException"><strong>EVInternalServerException</strong></a> – Server encountered an unexpected condition that prevented it
+    from fulfilling the request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="evclient.dataset_client.DatasetClient.delete_dataset">
+<span class="sig-name descname"><span class="pre">delete_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#evclient.dataset_client.DatasetClient.delete_dataset" title="Permalink to this definition"></a></dt>
+<dd><p>Deletes a specific dataset from EnergyView API by uuid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataset_uuid</strong> (<em>str</em>) – The UUID of the data set.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVBadRequestException" title="evclient.exceptions.EVBadRequestException"><strong>EVBadRequestException</strong></a> – Sent request had insufficient data or invalid options.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVUnauthorizedException" title="evclient.exceptions.EVUnauthorizedException"><strong>EVUnauthorizedException</strong></a> – Request was refused due to lacking authentication credentials.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVForbiddenException" title="evclient.exceptions.EVForbiddenException"><strong>EVForbiddenException</strong></a> – Server understands the request but refuses to authorize it.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVNotFoundException" title="evclient.exceptions.EVNotFoundException"><strong>EVNotFoundException</strong></a> – The requested resource was not found.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVTooManyRequestsException" title="evclient.exceptions.EVTooManyRequestsException"><strong>EVTooManyRequestsException</strong></a> – Sent too many requests in a given amount of time.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVInternalServerException" title="evclient.exceptions.EVInternalServerException"><strong>EVInternalServerException</strong></a> – Server encountered an unexpected condition that prevented it
+    from fulfilling the request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="evclient.dataset_client.DatasetClient.get_dataset">
+<span class="sig-name descname"><span class="pre">get_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../types/dataset_types.html#evclient.types.dataset_types.DatasetType" title="evclient.types.dataset_types.DatasetType"><span class="pre">evclient.types.dataset_types.DatasetType</span></a></span></span><a class="headerlink" href="#evclient.dataset_client.DatasetClient.get_dataset" title="Permalink to this definition"></a></dt>
+<dd><p>Fetches a specific dataset from EnergyView API by uuid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataset_uuid</strong> (<em>str</em>) – The UUID of the data set.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><a class="reference internal" href="../types/dataset_types.html#evclient.types.dataset_types.DatasetType" title="evclient.types.dataset_types.DatasetType"><code class="xref py py-class docutils literal notranslate"><span class="pre">DatasetType</span></code></a></p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVBadRequestException" title="evclient.exceptions.EVBadRequestException"><strong>EVBadRequestException</strong></a> – Sent request had insufficient data or invalid options.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVUnauthorizedException" title="evclient.exceptions.EVUnauthorizedException"><strong>EVUnauthorizedException</strong></a> – Request was refused due to lacking authentication credentials.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVForbiddenException" title="evclient.exceptions.EVForbiddenException"><strong>EVForbiddenException</strong></a> – Server understands the request but refuses to authorize it.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVNotFoundException" title="evclient.exceptions.EVNotFoundException"><strong>EVNotFoundException</strong></a> – The requested resource was not found.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVTooManyRequestsException" title="evclient.exceptions.EVTooManyRequestsException"><strong>EVTooManyRequestsException</strong></a> – Sent too many requests in a given amount of time.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVInternalServerException" title="evclient.exceptions.EVInternalServerException"><strong>EVInternalServerException</strong></a> – Server encountered an unexpected condition that prevented it
+    from fulfilling the request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="evclient.dataset_client.DatasetClient.get_dataset_content">
+<span class="sig-name descname"><span class="pre">get_dataset_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#evclient.dataset_client.DatasetClient.get_dataset_content" title="Permalink to this definition"></a></dt>
+<dd><p>Fetches the raw content of a specific dataset from EnergyView API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataset_uuid</strong> (<em>str</em>) – The UUID of the data set.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>Will return different results depending on the format of the raw content retrieved.</p>
+<p>The Content-Type header will be one of:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">text</span><span class="o">/</span><span class="n">csv</span><span class="p">:</span> <span class="n">csv</span>
+<span class="n">text</span><span class="o">/</span><span class="n">plan</span><span class="p">;</span> <span class="n">charset</span><span class="o">=</span><span class="n">utf</span><span class="o">-</span><span class="mi">8</span><span class="p">:</span> <span class="n">ini</span>
+<span class="n">application</span><span class="o">/</span><span class="n">json</span><span class="p">:</span> <span class="n">json</span>
+<span class="n">application</span><span class="o">/</span><span class="n">toml</span><span class="p">:</span> <span class="n">toml</span>
+<span class="n">application</span><span class="o">/</span><span class="n">xml</span><span class="p">:</span> <span class="n">xml</span>
+<span class="n">application</span><span class="o">/</span><span class="n">yaml</span><span class="p">:</span> <span class="n">yaml</span>
+<span class="n">application</span><span class="o">/</span><span class="n">octet</span><span class="o">-</span><span class="n">stream</span><span class="p">:</span> <span class="n">misc</span>
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVBadRequestException" title="evclient.exceptions.EVBadRequestException"><strong>EVBadRequestException</strong></a> – Sent request had insufficient data or invalid options.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVUnauthorizedException" title="evclient.exceptions.EVUnauthorizedException"><strong>EVUnauthorizedException</strong></a> – Request was refused due to lacking authentication credentials.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVForbiddenException" title="evclient.exceptions.EVForbiddenException"><strong>EVForbiddenException</strong></a> – Server understands the request but refuses to authorize it.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVNotFoundException" title="evclient.exceptions.EVNotFoundException"><strong>EVNotFoundException</strong></a> – The requested resource was not found.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVTooManyRequestsException" title="evclient.exceptions.EVTooManyRequestsException"><strong>EVTooManyRequestsException</strong></a> – Sent too many requests in a given amount of time.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVInternalServerException" title="evclient.exceptions.EVInternalServerException"><strong>EVInternalServerException</strong></a> – Server encountered an unexpected condition that prevented it
+    from fulfilling the request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="evclient.dataset_client.DatasetClient.get_datasets">
+<span class="sig-name descname"><span class="pre">get_datasets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../types/dataset_types.html#evclient.types.dataset_types.DatasetType" title="evclient.types.dataset_types.DatasetType"><span class="pre">evclient.types.dataset_types.DatasetType</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#evclient.dataset_client.DatasetClient.get_datasets" title="Permalink to this definition"></a></dt>
+<dd><p>Fetches datasets from EnergyView API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – An integer with the lowest value of 0. Used to skew (offset) the result range.</p></li>
+<li><p><strong>limit</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – An integer with the lowest value of 1 and the highest value of 100.
+Used to limit the amount of results returned for each “page”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List[<a class="reference internal" href="../types/dataset_types.html#evclient.types.dataset_types.DatasetType" title="evclient.types.dataset_types.DatasetType"><code class="xref py py-class docutils literal notranslate"><span class="pre">DatasetType</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVBadRequestException" title="evclient.exceptions.EVBadRequestException"><strong>EVBadRequestException</strong></a> – Sent request had insufficient data or invalid options.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVUnauthorizedException" title="evclient.exceptions.EVUnauthorizedException"><strong>EVUnauthorizedException</strong></a> – Request was refused due to lacking authentication credentials.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVForbiddenException" title="evclient.exceptions.EVForbiddenException"><strong>EVForbiddenException</strong></a> – Server understands the request but refuses to authorize it.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVTooManyRequestsException" title="evclient.exceptions.EVTooManyRequestsException"><strong>EVTooManyRequestsException</strong></a> – Sent too many requests in a given amount of time.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVInternalServerException" title="evclient.exceptions.EVInternalServerException"><strong>EVInternalServerException</strong></a> – Server encountered an unexpected condition that prevented it
+    from fulfilling the request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="evclient.dataset_client.DatasetClient.update_dataset">
+<span class="sig-name descname"><span class="pre">update_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thing_uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#evclient.dataset_client.DatasetClient.update_dataset" title="Permalink to this definition"></a></dt>
+<dd><p>Update a dataset in EnergyView API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset_uuid</strong> (<em>str</em>) – The UUID of the data set.</p></li>
+<li><p><strong>content</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The base64 encoded content of the object/file.</p></li>
+<li><p><strong>dataset_format</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – One of csv, ini, json, misc, toml, xml, yaml.</p></li>
+<li><p><strong>name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Name of the data set object.</p></li>
+<li><p><strong>tags</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Optional element used for filtering and identification. A list/array of strings.</p></li>
+<li><p><strong>thing_uuid</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Optional element used to bind a data set to a Node/Thing.
+Uses the globally unique identifier (UUID) of a Node/Thing.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVBadRequestException" title="evclient.exceptions.EVBadRequestException"><strong>EVBadRequestException</strong></a> – Sent request had insufficient data or invalid options.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVUnauthorizedException" title="evclient.exceptions.EVUnauthorizedException"><strong>EVUnauthorizedException</strong></a> – Request was refused due to lacking authentication credentials.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVForbiddenException" title="evclient.exceptions.EVForbiddenException"><strong>EVForbiddenException</strong></a> – Server understands the request but refuses to authorize it.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVTooManyRequestsException" title="evclient.exceptions.EVTooManyRequestsException"><strong>EVTooManyRequestsException</strong></a> – Sent too many requests in a given amount of time.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVInternalServerException" title="evclient.exceptions.EVInternalServerException"><strong>EVInternalServerException</strong></a> – Server encountered an unexpected condition that prevented it
+    from fulfilling the request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="csv_import_client.html" class="btn btn-neutral float-left" title="CSV Import Client" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="node_client.html" class="btn btn-neutral float-right" title="Node Client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, NODA Intelligent Systems AB.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
