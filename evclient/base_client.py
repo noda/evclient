@@ -57,7 +57,7 @@ class BaseClient:
         elif os.environ.get('EV_DOMAIN'):
             self._domain = os.environ.get('EV_DOMAIN')
         else:
-            raise EVFatalErrorException('No domain provided to EVCClient')
+            raise EVFatalErrorException('No domain provided to EVClient')
 
         self._session = requests.Session()
         self._session.headers = {'Accept': 'application/json'}
@@ -66,8 +66,8 @@ class BaseClient:
         elif os.environ.get('EV_API_KEY'):
             self._session.headers['Authorization'] = f'Bearer {os.environ.get("EV_API_KEY")}'
         else:
-            raise EVFatalErrorException('No api key provided to EVCClient')
-
+            raise EVFatalErrorException('No api key provided to EVClient')
+        
     def _process_response(self, response: Response) -> Optional[Any]:
         """Process the response from EnergyView API
 
