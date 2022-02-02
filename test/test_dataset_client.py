@@ -48,7 +48,7 @@ class TestDatasetClient(unittest.TestCase):
 
         responses.add(
             responses.GET,
-            url=f'{self.client._url}/{self.client._api_path}',
+            url=f'{self.client._url}/{self.client._dataset_api_path}',
             json=mock_response,
             status=200
         )
@@ -66,7 +66,7 @@ class TestDatasetClient(unittest.TestCase):
 
             self.assertEqual(
                 responses.calls[0].request.url,
-                f'{self.client._url}/{self.client._api_path}'
+                f'{self.client._url}/{self.client._dataset_api_path}'
                 f'?{urllib.parse.urlencode(params)}'
             )
             self.assertEqual(responses.calls[0].request.params.get('offset'), str(params['offset']))
@@ -90,7 +90,7 @@ class TestDatasetClient(unittest.TestCase):
 
         responses.add(
             responses.POST,
-            url=f'{self.client._url}/{self.client._api_path}',
+            url=f'{self.client._url}/{self.client._dataset_api_path}',
             json=mock_response,
             status=200
         )
@@ -111,7 +111,7 @@ class TestDatasetClient(unittest.TestCase):
 
             self.assertEqual(
                 responses.calls[0].request.url,
-                f'{self.client._url}/{self.client._api_path}'
+                f'{self.client._url}/{self.client._dataset_api_path}'
             )
             parsed_request_body: Any = json.loads(responses.calls[0].request.body.decode('utf-8'))
             self.assertEqual(parsed_request_body['content'], params['content'])
@@ -140,7 +140,7 @@ class TestDatasetClient(unittest.TestCase):
 
         responses.add(
             responses.GET,
-            url=f'{self.client._url}/{self.client._api_path}/{dataset_uuid}',
+            url=f'{self.client._url}/{self.client._dataset_api_path}/{dataset_uuid}',
             json=mock_response,
             status=200
         )
@@ -154,7 +154,7 @@ class TestDatasetClient(unittest.TestCase):
 
             self.assertEqual(
                 responses.calls[0].request.url,
-                f'{self.client._url}/{self.client._api_path}/{dataset_uuid}'
+                f'{self.client._url}/{self.client._dataset_api_path}/{dataset_uuid}'
             )
 
     @responses.activate
@@ -164,7 +164,7 @@ class TestDatasetClient(unittest.TestCase):
             file_content = file.read()
             responses.add(
                 responses.GET,
-                url=f'{self.client._url}/{self.client._api_path}/{dataset_uuid}/raw',
+                url=f'{self.client._url}/{self.client._dataset_api_path}/{dataset_uuid}/raw',
                 body=file_content,
                 content_type='text/csv',
                 status=200
@@ -178,7 +178,7 @@ class TestDatasetClient(unittest.TestCase):
 
                 self.assertEqual(
                     responses.calls[0].request.url,
-                    f'{self.client._url}/{self.client._api_path}/{dataset_uuid}/raw'
+                    f'{self.client._url}/{self.client._dataset_api_path}/{dataset_uuid}/raw'
                 )
 
     @responses.activate
@@ -186,7 +186,7 @@ class TestDatasetClient(unittest.TestCase):
         dataset_uuid = '11eff124-fdd1-4b0e-9d1a-52b9fe8497cb'
         responses.add(
             responses.PUT,
-            url=f'{self.client._url}/{self.client._api_path}/{dataset_uuid}',
+            url=f'{self.client._url}/{self.client._dataset_api_path}/{dataset_uuid}',
             status=200
         )
 
@@ -205,7 +205,7 @@ class TestDatasetClient(unittest.TestCase):
 
             self.assertEqual(
                 responses.calls[0].request.url,
-                f'{self.client._url}/{self.client._api_path}/{dataset_uuid}'
+                f'{self.client._url}/{self.client._dataset_api_path}/{dataset_uuid}'
             )
             parsed_request_body: Any = json.loads(responses.calls[0].request.body.decode('utf-8'))
             self.assertEqual(parsed_request_body['content'], params['content'])
@@ -220,7 +220,7 @@ class TestDatasetClient(unittest.TestCase):
 
         responses.add(
             responses.DELETE,
-            url=f'{self.client._url}/{self.client._api_path}/{dataset_uuid}',
+            url=f'{self.client._url}/{self.client._dataset_api_path}/{dataset_uuid}',
             status=200
         )
 
@@ -231,5 +231,5 @@ class TestDatasetClient(unittest.TestCase):
 
             self.assertEqual(
                 responses.calls[0].request.url,
-                f'{self.client._url}/{self.client._api_path}/{dataset_uuid}'
+                f'{self.client._url}/{self.client._dataset_api_path}/{dataset_uuid}'
             )

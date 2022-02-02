@@ -13,7 +13,7 @@ class TagClient(BaseClient):
 
     def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None):
         super().__init__(domain, api_key, endpoint_url)
-        self._api_path: str = 'tags'
+        self._tag_api_path: str = 'tags'
 
     def get_tags(self) -> TagResponse:
         """Fetches all tags / sensors from EnergyView API
@@ -30,6 +30,6 @@ class TagClient(BaseClient):
                                         from fulfilling the request.
         """
         response: Response = self._session.get(
-            url=f'{self._url}/{self._api_path}'
+            url=f'{self._url}/{self._tag_api_path}'
         )
         return self._process_response(response)

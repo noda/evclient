@@ -40,7 +40,7 @@ class TestTimeseriesClient(unittest.TestCase):
 
         responses.add(
             responses.GET,
-            url=f'{self.client._url}/{self.client._api_path}',
+            url=f'{self.client._url}/{self.client._timeseries_api_path}',
             json=mock_response,
             status=200
         )
@@ -73,7 +73,7 @@ class TestTimeseriesClient(unittest.TestCase):
 
             self.assertEqual(
                 responses.calls[0].request.url,
-                f'{self.client._url}/{self.client._api_path}'
+                f'{self.client._url}/{self.client._timeseries_api_path}'
                 f'?{urllib.parse.urlencode(expected_query_params)}'
             )
             self.assertEqual(responses.calls[0].request.params.get('node_id'), expected_query_params['node_id'])
@@ -97,7 +97,7 @@ class TestTimeseriesClient(unittest.TestCase):
 
         responses.add(
             responses.POST,
-            url=f'{self.client._url}/{self.client._api_path}',
+            url=f'{self.client._url}/{self.client._timeseries_api_path}',
             json=mock_response,
             status=200
         )
@@ -117,7 +117,7 @@ class TestTimeseriesClient(unittest.TestCase):
 
             self.assertEqual(
                 responses.calls[0].request.url,
-                f'{self.client._url}/{self.client._api_path}'
+                f'{self.client._url}/{self.client._timeseries_api_path}'
             )
             body_params: Dict[str, str] = urllib.parse.parse_qs(responses.calls[0].request.body)
             self.assertEqual(body_params['node_id'][0], str(body['node_id']))
@@ -148,7 +148,7 @@ class TestTimeseriesClient(unittest.TestCase):
 
         responses.add(
             responses.POST,
-            url=f'{self.client._url}/{self.client._api_path}',
+            url=f'{self.client._url}/{self.client._timeseries_api_path}',
             json=mock_response,
             status=200
         )
@@ -167,7 +167,7 @@ class TestTimeseriesClient(unittest.TestCase):
 
             self.assertEqual(
                 responses.calls[0].request.url,
-                f'{self.client._url}/{self.client._api_path}'
+                f'{self.client._url}/{self.client._timeseries_api_path}'
             )
             body_params: Dict[str, str] = urllib.parse.parse_qs(responses.calls[0].request.body)
             self.assertEqual(body_params['timeseries'][0], json.dumps(body['timeseries']))

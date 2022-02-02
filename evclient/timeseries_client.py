@@ -17,7 +17,7 @@ class TimeseriesClient(BaseClient):
 
     def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None):
         super().__init__(domain, api_key, endpoint_url)
-        self._api_path: str = 'timeseries'
+        self._timeseries_api_path: str = 'timeseries'
 
     def get_timeseries_data(self,
                             node_id: int = None,
@@ -104,7 +104,7 @@ class TimeseriesClient(BaseClient):
                                         from fulfilling the request.
         """
         response: Response = self._session.get(
-            url=f'{self._url}/{self._api_path}',
+            url=f'{self._url}/{self._timeseries_api_path}',
             params=filter_none_values_from_dict({
                 'node_id': node_id,
                 'node_ids': json.dumps(node_ids) if node_ids else None,
@@ -146,7 +146,7 @@ class TimeseriesClient(BaseClient):
                                         from fulfilling the request.
         """
         response: Response = self._session.post(
-            url=f'{self._url}/{self._api_path}',
+            url=f'{self._url}/{self._timeseries_api_path}',
             data=filter_none_values_from_dict({
                 'node_id': node_id,
                 'tag': tag,
@@ -201,7 +201,7 @@ class TimeseriesClient(BaseClient):
                                         from fulfilling the request.
         """
         response: Response = self._session.post(
-            url=f'{self._url}/{self._api_path}',
+            url=f'{self._url}/{self._timeseries_api_path}',
             data=filter_none_values_from_dict({
                 'timeseries': json.dumps(timeseries),
                 'overwrite': overwrite,

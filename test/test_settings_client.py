@@ -34,7 +34,7 @@ class TestSettingsClient(unittest.TestCase):
 
         responses.add(
             responses.GET,
-            url=f'{self.client._url}/{self.client._api_path}/{self.settings_type}/{self.settings_id}',
+            url=f'{self.client._url}/{self.client._settings_api_path}/{self.settings_type}/{self.settings_id}',
             json=mock_response,
             status=200
         )
@@ -52,7 +52,7 @@ class TestSettingsClient(unittest.TestCase):
 
             self.assertEqual(
                 responses.calls[0].request.url,
-                f'{self.client._url}/{self.client._api_path}/{self.settings_type}/{self.settings_id}'
+                f'{self.client._url}/{self.client._settings_api_path}/{self.settings_type}/{self.settings_id}'
                 f'?{urllib.parse.urlencode({"path": params["path"], "extract": 1})}'
             )
             self.assertEqual(responses.calls[0].request.params.get('path'), str(params['path']))
@@ -70,7 +70,7 @@ class TestSettingsClient(unittest.TestCase):
 
             self.assertEqual(
                 responses.calls[1].request.url,
-                f'{self.client._url}/{self.client._api_path}/{self.settings_type}/{self.settings_id}'
+                f'{self.client._url}/{self.client._settings_api_path}/{self.settings_type}/{self.settings_id}'
                 f'?{urllib.parse.urlencode({"path": params["path"], "extract": 0})}'
             )
             self.assertEqual(responses.calls[1].request.params.get('path'), str(params['path']))
@@ -84,7 +84,7 @@ class TestSettingsClient(unittest.TestCase):
 
         responses.add(
             responses.PUT,
-            url=f'{self.client._url}/{self.client._api_path}/{self.settings_type}/{self.settings_id}',
+            url=f'{self.client._url}/{self.client._settings_api_path}/{self.settings_type}/{self.settings_id}',
             json=mock_response,
             status=200
         )
@@ -103,7 +103,7 @@ class TestSettingsClient(unittest.TestCase):
 
             self.assertEqual(
                 responses.calls[0].request.url,
-                f'{self.client._url}/{self.client._api_path}/{self.settings_type}/{self.settings_id}'
+                f'{self.client._url}/{self.client._settings_api_path}/{self.settings_type}/{self.settings_id}'
             )
             body_params: Dict[str, str] = urllib.parse.parse_qs(responses.calls[0].request.body)
             self.assertEqual(body_params['path'][0], params['path'])
@@ -123,7 +123,7 @@ class TestSettingsClient(unittest.TestCase):
 
             self.assertEqual(
                 responses.calls[0].request.url,
-                f'{self.client._url}/{self.client._api_path}/{self.settings_type}/{self.settings_id}'
+                f'{self.client._url}/{self.client._settings_api_path}/{self.settings_type}/{self.settings_id}'
             )
             body_params: Dict[str, str] = urllib.parse.parse_qs(responses.calls[1].request.body)
             self.assertEqual(body_params['path'][0], params['path'])

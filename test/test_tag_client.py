@@ -29,7 +29,7 @@ class TestTagClient(unittest.TestCase):
         with self.subTest('call successful with complete parameter list'):
             responses.add(
                 responses.GET,
-                url=f'{self.client._url}/{self.client._api_path}',
+                url=f'{self.client._url}/{self.client._tag_api_path}',
                 json=mock_response,
                 status=200
             )
@@ -41,5 +41,5 @@ class TestTagClient(unittest.TestCase):
 
             self.assertEqual(
                 responses.calls[0].request.url,
-                f'{self.client._url}/{self.client._api_path}'
+                f'{self.client._url}/{self.client._tag_api_path}'
             )

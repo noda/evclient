@@ -14,7 +14,7 @@ class CSVImportClient(BaseClient):
 
     def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None):
         super().__init__(domain, api_key, endpoint_url)
-        self._api_path: str = 'csvimport'
+        self._csv_import_api_path: str = 'csvimport'
 
     def get_csv_imports(self) -> CSVImportResponse:
         """Fetches all existing csv import definitions from EnergyView API
@@ -31,7 +31,7 @@ class CSVImportClient(BaseClient):
                                         from fulfilling the request.
         """
         response: Response = self._session.get(
-            url=f'{self._url}/{self._api_path}'
+            url=f'{self._url}/{self._csv_import_api_path}'
         )
         return self._process_response(response)
 
@@ -52,7 +52,7 @@ class CSVImportClient(BaseClient):
                                         from fulfilling the request.
         """
         response: Response = self._session.post(
-            url=f'{self._url}/{self._api_path}/{import_uuid}',
+            url=f'{self._url}/{self._csv_import_api_path}/{import_uuid}',
             files={'file': csv_file}
         )
         return self._process_response(response)

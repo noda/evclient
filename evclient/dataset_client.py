@@ -16,7 +16,7 @@ class DatasetClient(BaseClient):
 
     def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None):
         super().__init__(domain, api_key, endpoint_url)
-        self._api_path: str = 'dataset'
+        self._dataset_api_path: str = 'dataset'
 
     def get_datasets(self,
                      offset: int = None,
@@ -41,7 +41,7 @@ class DatasetClient(BaseClient):
                                         from fulfilling the request.
         """
         response: Response = self._session.get(
-            url=f'{self._url}/{self._api_path}',
+            url=f'{self._url}/{self._dataset_api_path}',
             params=filter_none_values_from_dict({
                 'offset': offset,
                 'limit': limit
@@ -78,7 +78,7 @@ class DatasetClient(BaseClient):
                                         from fulfilling the request.
         """
         response: Response = self._session.post(
-            url=f'{self._url}/{self._api_path}',
+            url=f'{self._url}/{self._dataset_api_path}',
             json=filter_none_values_from_dict({
                 'content': content,
                 'format': dataset_format,
@@ -108,7 +108,7 @@ class DatasetClient(BaseClient):
                                         from fulfilling the request.
         """
         response: Response = self._session.get(
-            url=f'{self._url}/{self._api_path}/{dataset_uuid}'
+            url=f'{self._url}/{self._dataset_api_path}/{dataset_uuid}'
         )
         return self._process_response(response)
 
@@ -141,7 +141,7 @@ class DatasetClient(BaseClient):
                                         from fulfilling the request.
         """
         response: Response = self._session.get(
-            url=f'{self._url}/{self._api_path}/{dataset_uuid}/raw'
+            url=f'{self._url}/{self._dataset_api_path}/{dataset_uuid}/raw'
         )
         return self._process_response(response)
 
@@ -173,7 +173,7 @@ class DatasetClient(BaseClient):
                                         from fulfilling the request.
         """
         response: Response = self._session.put(
-            url=f'{self._url}/{self._api_path}/{dataset_uuid}',
+            url=f'{self._url}/{self._dataset_api_path}/{dataset_uuid}',
             json=filter_none_values_from_dict({
                 'content': content,
                 'format': dataset_format,
@@ -200,6 +200,6 @@ class DatasetClient(BaseClient):
                                         from fulfilling the request.
         """
         response: Response = self._session.delete(
-            url=f'{self._url}/{self._api_path}/{dataset_uuid}'
+            url=f'{self._url}/{self._dataset_api_path}/{dataset_uuid}'
         )
         return self._process_response(response)
