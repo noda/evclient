@@ -32,7 +32,7 @@ class TestBaseClient(unittest.TestCase):
         )
         self.assertEqual(client._domain, self.domain)
         self.assertEqual(client._session.headers, {
-            'Authorization': f'Bearer {self.api_key}',
+            'Authorization': f'Key {self.api_key}',
             'Accept': 'application/json'
         })
 
@@ -44,7 +44,7 @@ class TestBaseClient(unittest.TestCase):
         client: BaseClient = BaseClient()
         self.assertEqual(client._domain, 'test')
         self.assertEqual(client._session.headers, {
-            'Authorization': 'Bearer 123456789',
+            'Authorization': 'Key 123456789',
             'Accept': 'application/json'
         })
 
@@ -78,7 +78,7 @@ class TestBaseClient(unittest.TestCase):
         )
         client._session.get(client._base_url)
 
-        self.assertEqual(responses.calls[0].request.headers.get('Authorization'), f'Bearer {self.api_key}')
+        self.assertEqual(responses.calls[0].request.headers.get('Authorization'), f'Key {self.api_key}')
 
     @responses.activate
     def test_process_response(self) -> None:
