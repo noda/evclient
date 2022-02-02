@@ -22,7 +22,7 @@ class TestEVClient(unittest.TestCase):
         )
         self.assertEqual(client._domain, self.domain)
         self.assertEqual(client._session.headers, {
-            'Authorization': f'Bearer {self.api_key}',
+            'Authorization': f'Key {self.api_key}',
             'Accept': 'application/json'
         })
 

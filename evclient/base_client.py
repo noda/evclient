@@ -64,9 +64,9 @@ class BaseClient:
         else:
             self._base_url: str = 'https://customer.noda.se'
             self._api_root: str = 'api'
-            
+
         self._api_version: str = 'v1'
-            
+
         if domain:
             self._domain = domain
         elif os.environ.get('EV_DOMAIN'):
@@ -84,7 +84,7 @@ class BaseClient:
             self._session.headers['Authorization'] = f'Key {os.environ.get("EV_API_KEY")}'
         else:
             raise EVFatalErrorException('No api key provided to EVClient')
-        
+
     def _process_response(self, response: Response) -> Optional[Any]:
         """Process the response from EnergyView API
 
