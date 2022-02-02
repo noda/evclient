@@ -2,6 +2,7 @@ import json.decoder
 import os
 import logging
 from typing import Type, Dict, Optional, Any
+from urllib.parse import urlparse
 
 import requests
 
@@ -28,7 +29,7 @@ class BaseClient:
     Should only be used as an abstract class.
     """
 
-    def __init__(self, domain: str = None, api_key: str = None) -> None:
+    def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None) -> None:
         """BaseClient constructor
 
         Defines the base url and customer domain for the EnergyView API and sets headers in a new
@@ -40,16 +41,30 @@ class BaseClient:
 
         EV_API_KEY
 
+        EV_ENDPOINT_URL
+
         Args:
             domain (Optional[str]): The EnergyView domain to make requests to.
             api_key (Optional[str]): API Key for the selected EnergyView domain.
+            endpoint_url (Optional[str]): Alternative EnergyView URL
 
         Raises:
             :class:`.EVFatalErrorException`: The client could not find a specified domain
                 or api key for the EnergyView API
         """
-        self._base_url: str = 'https://customer.noda.se'
-        self._api_root: str = 'api'
+        if endpoint_url is not None:
+            path: str = urlparse(endpoint_url).path
+            self._base_url: str = endpoint_url[:-len(path)]
+            self._api_root: str = path[1:]
+        elif os.environ.get('EV_ENDPOINT_URL'):
+            url: str = os.environ.get('EV_ENDPOINT_URL')
+            path: str = urlparse(url).path
+            self._base_url: str = url[:-len(path)]
+            self._api_root: str = path[1:]
+        else:
+            self._base_url: str = 'https://customer.noda.se'
+            self._api_root: str = 'api'
+            
         self._api_version: str = 'v1'
             
         if domain:

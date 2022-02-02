@@ -11,8 +11,8 @@ class TagClient(BaseClient):
     A client for handling the tag / sensor section of EnergyView API.
     """
 
-    def __init__(self, domain: str = None, api_key: str = None):
-        super().__init__(domain, api_key)
+    def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None):
+        super().__init__(domain, api_key, endpoint_url)
         self._api_path: str = 'tags'
 
     def get_tags(self) -> TagResponse:
