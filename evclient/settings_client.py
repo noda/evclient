@@ -15,7 +15,7 @@ class SettingsClient(BaseClient):
 
     def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None):
         super().__init__(domain, api_key, endpoint_url)
-        self._api_path: str = 'settings'
+        self._settings_api_path: str = 'settings'
 
     def get_settings(self,
                      settings_type: str,
@@ -67,7 +67,7 @@ class SettingsClient(BaseClient):
                                         from fulfilling the request.
         """
         response: Response = self._session.get(
-            url=f'{self._url}/{self._api_path}/{settings_type}/{settings_id}',
+            url=f'{self._url}/{self._settings_api_path}/{settings_type}/{settings_id}',
             params=filter_none_values_from_dict({
                 'path': path,
                 'extract': 1 if extract else 0
@@ -114,7 +114,7 @@ class SettingsClient(BaseClient):
                                         from fulfilling the request.
         """
         response: Response = self._session.put(
-            url=f'{self._url}/{self._api_path}/{settings_type}/{settings_id}',
+            url=f'{self._url}/{self._settings_api_path}/{settings_type}/{settings_id}',
             data=filter_none_values_from_dict({
                 'path': path,
                 'value': value,

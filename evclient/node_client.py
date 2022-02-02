@@ -13,7 +13,7 @@ class NodeClient(BaseClient):
 
     def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None):
         super().__init__(domain, api_key, endpoint_url)
-        self._api_path: str = 'nodes'
+        self._node_api_path: str = 'nodes'
 
     def get_nodes(self) -> NodeResponse:
         """Fetches all nodes / collectors from EnergyView API
@@ -30,6 +30,6 @@ class NodeClient(BaseClient):
                                         from fulfilling the request.
         """
         response: Response = self._session.get(
-            url=f'{self._url}/{self._api_path}'
+            url=f'{self._url}/{self._node_api_path}'
         )
         return self._process_response(response)
