@@ -51,13 +51,15 @@ class BaseClient:
         self._base_url: str = 'https://customer.noda.se'
         self._api_root: str = 'api'
         self._api_version: str = 'v1'
-        self._url: str = f'{self._base_url}/{self._api_root}/{self._api_version}'
+            
         if domain:
             self._domain = domain
         elif os.environ.get('EV_DOMAIN'):
             self._domain = os.environ.get('EV_DOMAIN')
         else:
             raise EVFatalErrorException('No domain provided to EVClient')
+
+        self._url: str = f'{self._base_url}/{self._domain}/{self._api_root}/{self._api_version}'
 
         self._session = requests.Session()
         self._session.headers = {'Accept': 'application/json'}
