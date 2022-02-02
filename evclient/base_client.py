@@ -64,9 +64,9 @@ class BaseClient:
         self._session = requests.Session()
         self._session.headers = {'Accept': 'application/json'}
         if api_key:
-            self._session.headers['Authorization'] = f'Bearer {api_key}'
+            self._session.headers['Authorization'] = f'Key {api_key}'
         elif os.environ.get('EV_API_KEY'):
-            self._session.headers['Authorization'] = f'Bearer {os.environ.get("EV_API_KEY")}'
+            self._session.headers['Authorization'] = f'Key {os.environ.get("EV_API_KEY")}'
         else:
             raise EVFatalErrorException('No api key provided to EVClient')
         
