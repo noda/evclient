@@ -3,7 +3,7 @@ name: Run tests
 on:
   push:
   pull_request:
-    branches-ignore: [ master ]
+    branches-ignore: [ main ]
 
 jobs:
   run-tests:
