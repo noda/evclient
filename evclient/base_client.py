@@ -16,6 +16,7 @@ from .exceptions import (
     EVTooManyRequestsException,
     EVInternalServerException,
     EVFatalErrorException,
+    EVUnexpectedStatusCodeException,
 )
 
 logger = logging.getLogger(__name__)
@@ -122,6 +123,10 @@ class BaseClient:
             except json.decoder.JSONDecodeError:
                 return response.content or None
         elif 400 <= response.status_code < 500:
-            raise responses[response.status_code]
+            msg = None
+            if response.json():
+                msg = response.json().get("error")
+            exception = responses.get(response.status_code, EVUnexpectedStatusCodeException)
+            raise exception(msg)
         else:
             raise EVInternalServerException
