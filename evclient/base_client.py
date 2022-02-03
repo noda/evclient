@@ -53,18 +53,14 @@ class BaseClient:
                 or api key for the EnergyView API
         """
         if endpoint_url is not None:
-            path: str = urlparse(endpoint_url).path
-            self._base_url: str = endpoint_url[:-len(path)]
-            self._api_root: str = path[1:]
+            self._base_url: str = endpoint_url
         elif os.environ.get('EV_ENDPOINT_URL'):
-            url: str = os.environ.get('EV_ENDPOINT_URL')
-            path: str = urlparse(url).path
-            self._base_url: str = url[:-len(path)]
-            self._api_root: str = path[1:]
+            self._base_url: str = os.environ.get('EV_ENDPOINT_URL')
         else:
             self._base_url: str = 'https://customer.noda.se'
             self._api_root: str = 'api'
 
+        self._api_root: str = 'api'
         self._api_version: str = 'v1'
 
         if domain:
