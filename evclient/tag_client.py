@@ -32,4 +32,5 @@ class TagClient(BaseClient):
         response: Response = self._session.get(
             url=f'{self._url}/{self._tag_api_path}'
         )
-        return self._process_response(response)
+        r = self._process_response(response)
+        return r.get("sensors")
