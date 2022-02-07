@@ -1,9 +1,18 @@
+import pyrfc3339
 import json
 from typing import List, Optional
 
 import requests
 
-from .types.timeseries_types import TimeseriesResponse, TimeseriesDataResponse, TimeseriesType
+from .types.timeseries_types import (
+    TimeseriesResponseData,
+    TimeseriesResponseGroup,
+    TimeseriesResponse,
+    TimeseriesDataResponse,
+    TimeseriesData,
+    TimeseriesGroup,
+    TimeseriesElements
+)
 from .base_client import BaseClient
 from .utils import filter_none_values_from_dict
 
@@ -29,7 +38,7 @@ class TimeseriesClient(BaseClient):
                             resolution: str = None,
                             aggregate: str = None,
                             epoch: bool = False
-                            ) -> TimeseriesResponse:
+                            ) -> TimeseriesElements:
         """Fetches all timeseries data from EnergyView API
 
         Args:
@@ -93,7 +102,7 @@ class TimeseriesClient(BaseClient):
                 which is the time 00:00:00 UTC on 1 January 1970.
 
         Returns:
-            :class:`.TimeseriesResponse`
+            :class:`.TimeseriesElements`
 
         Raises:
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
@@ -117,14 +126,33 @@ class TimeseriesClient(BaseClient):
                 'epoch': 1 if epoch else None,
             })
         )
-        return self._process_response(response)
+
+        def parse_row(x):
+            return {
+                "ts": pyrfc3339.parse(x.get("ts")),
+                "v": x.get("v")
+            }
+
+        r: TimeseriesResponse = self._process_response(response)
+        if r is None:
+            return None
+
+        timeseries: List[TimeseriesResponseGroup] = r.get("timeseries")
+        if timeseries is not None:
+            timeseries = [{
+                "node_id": obj.get("node_id"),
+                "tag": obj.get("tag"),
+                "data": [parse_row(row) for row in obj.get("data", [])]
+            } for obj in timeseries]
+        return timeseries
 
     def store_timeseries_data(self,
                               node_id: int,
                               tag: str,
                               val: float,
-                              ts: str
-                              ) -> TimeseriesDataResponse:
+                              ts: str,
+                              silent: bool = True
+                              ) -> Optional[TimeseriesDataResponse]:
         """Store a single data point in a timeseries from EnergyView API
 
         Args:
@@ -133,9 +161,10 @@ class TimeseriesClient(BaseClient):
             val (float): The value to store.
             ts (str): The date time of the data point as string on the format YYYY-MM-DDThh:mm:ss±hh:mm.
                 Without timezone information, the API will fall back to the time zone configured for the domain.
+            silent (bool): Reply with 201 and an empty body instead of the inserted content.
 
         Returns:
-            :class:`.TimeseriesDataResponse`
+            :class:`.TimeseriesDataResponse` or None depending on if the `silent` param is set.
 
         Raises:
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
@@ -151,16 +180,17 @@ class TimeseriesClient(BaseClient):
                 'node_id': node_id,
                 'tag': tag,
                 'val': val,
-                'ts': ts
+                'ts': ts,
+                'silent': 'true' if silent else None
             })
         )
         return self._process_response(response)
 
     def store_multiple_timeseries_data(self,
-                                       timeseries: List[TimeseriesType],
+                                       timeseries: List[TimeseriesGroup],
                                        overwrite: str = None,
-                                       silent: bool = None,
-                                       ) -> Optional[TimeseriesResponse]:
+                                       silent: bool = True,
+                                       ) -> Optional[TimeseriesElements]:
         """Store multiple data points in multiple timeseries from EnergyView API
 
         Args:
@@ -172,10 +202,10 @@ class TimeseriesClient(BaseClient):
                         'tag': 'outdoortemp',
                         'data': [{
                             'v': 2.6,
-                            'ts': '2020-01-01T00:00:00'
+                            'ts': datetime.datetime(2020, 1, 1, 0, 0, tzinfo=<UTC+01:00>)
                         },{
                             'v': 2.6,
-                            'ts': '2020-01-01T00:15:00'
+                            'ts': datetime.datetime(2020, 1, 1, 0, 15, tzinfo=<UTC+01:00>)
                         }]
                     }
                 ]
@@ -187,10 +217,10 @@ class TimeseriesClient(BaseClient):
                 replace_window first deletes all datapoints between the lowest and highest ts (a >= x AND a <= y),
                 for each node_id and corresponding tag. Then inserts all the new datapoints.
             silent (Optional[bool]): When set to true a call will only reply with status code 201 Created and an empty
-                reply instead of 200 Success and the inserted rows.
+                reply instead of 200 Success and the inserted rows. Defaults to True.
 
         Returns:
-            :class:`.TimeseriesResponse` or None depending on if the `silent` param is set.
+            :class:`.TimeseriesElements` or None depending on if the `silent` param is set.
 
         Raises:
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
@@ -205,7 +235,7 @@ class TimeseriesClient(BaseClient):
             data=filter_none_values_from_dict({
                 'timeseries': json.dumps(timeseries),
                 'overwrite': overwrite,
-                'silent': silent
+                'silent': 'true' if silent else None
             })
         )
         return self._process_response(response)

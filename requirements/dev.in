@@ -2,6 +2,7 @@
 -c requirements.txt
 
 responses
+pyRFC3339
 coverage
 flake8
 pre-commit

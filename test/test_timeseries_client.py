@@ -1,11 +1,20 @@
 import json
-
+import pyrfc3339
 import responses
 import unittest
 import urllib
 from typing import Dict, Any, Optional
 
-from evclient import TimeseriesClient, TimeseriesResponse, TimeseriesDataResponse, TimeseriesType
+from evclient import (
+    TimeseriesClient,
+    TimeseriesResponseData,
+    TimeseriesResponseGroup,
+    TimeseriesResponse,
+    TimeseriesDataResponse,
+    TimeseriesData,
+    TimeseriesGroup,
+    TimeseriesElements
+)
 
 
 class TestTimeseriesClient(unittest.TestCase):
@@ -45,6 +54,18 @@ class TestTimeseriesClient(unittest.TestCase):
             status=200
         )
 
+        def parse_response(x):
+            return [{
+                "node_id": obj.get("node_id"),
+                "tag": obj.get("tag"),
+                "data": [
+                    {
+                        "ts": pyrfc3339.parse(row.get("ts")),
+                        "v": row.get("v")
+                    } for row in obj.get("data", [])
+                ]
+            } for obj in x.get("timeseries", [])]
+
         with self.subTest('call successful with complete parameter list'):
             params: Dict[str, Any] = {
                 'node_id': 1,
@@ -60,7 +81,7 @@ class TestTimeseriesClient(unittest.TestCase):
 
             res: TimeseriesResponse = self.client.get_timeseries_data(**params)
 
-            self.assertEqual(res, mock_response)
+            self.assertEqual(res, parse_response(mock_response))
             self.assertEqual(len(responses.calls), 1)
 
             expected_query_params: Dict[str, Any] = {
@@ -157,7 +178,7 @@ class TestTimeseriesClient(unittest.TestCase):
             body: Dict[str, Any] = {
                 'timeseries': [timeseries],
                 'overwrite': 'replace_window',
-                'silent': True,
+                'silent': 'true',
             }
 
             res: Optional[TimeseriesResponse] = self.client.store_multiple_timeseries_data(**body)

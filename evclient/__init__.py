@@ -34,10 +34,13 @@ from .types.tag_types import (
     TagResponse
 )
 from .types.timeseries_types import (
-    TimeseriesDataType,
-    TimeseriesType,
+    TimeseriesResponseData,
+    TimeseriesResponseGroup,
     TimeseriesResponse,
-    TimeseriesDataResponse
+    TimeseriesDataResponse,
+    TimeseriesData,
+    TimeseriesGroup,
+    TimeseriesElements
 )
 from .types.dataset_types import DatasetType
 

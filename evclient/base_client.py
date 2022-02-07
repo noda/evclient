@@ -2,9 +2,12 @@ import json.decoder
 import os
 import logging
 from typing import Type, Dict, Optional, Any
-from urllib.parse import urlparse
 
 import requests
+try:
+    from json.decoder import JSONDecodeError
+except ImportError:
+    JSONDecodeError = ValueError
 
 from .exceptions import (
     EVBadRequestException,
@@ -124,8 +127,11 @@ class BaseClient:
                 return response.content or None
         elif 400 <= response.status_code < 500:
             msg = None
-            if response.json():
-                msg = response.json().get("error")
+            try:
+                if response.headers.get("content-type") == "application/json":
+                    msg = response.json().get("error")
+            except JSONDecodeError:
+                pass
             exception = responses.get(response.status_code, EVUnexpectedStatusCodeException)
             raise exception(msg)
         else:
