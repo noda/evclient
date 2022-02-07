@@ -85,6 +85,33 @@
   <section id="module-evclient.types.timeseries_types">
 <span id="timeseries-types"></span><h1>Timeseries Types<a class="headerlink" href="#module-evclient.types.timeseries_types" title="Permalink to this headline"></a></h1>
 <dl class="py class">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.types.timeseries_types.</span></span><span class="sig-name descname"><span class="pre">TimeseriesData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesData" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesData.v">
+<span class="sig-name descname"><span class="pre">v</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesData.v" title="Permalink to this definition"></a></dt>
+<dd><p>Value of the data point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesData.ts">
+<span class="sig-name descname"><span class="pre">ts</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesData.ts" title="Permalink to this definition"></a></dt>
+<dd><p>Date time object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>datetime.datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesDataResponse">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.types.timeseries_types.</span></span><span class="sig-name descname"><span class="pre">TimeseriesDataResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesDataResponse" title="Permalink to this definition"></a></dt>
 <dd><dl class="py attribute">
@@ -129,26 +156,42 @@
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesDataType">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.types.timeseries_types.</span></span><span class="sig-name descname"><span class="pre">TimeseriesDataType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesDataType" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesElements">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.types.timeseries_types.</span></span><span class="sig-name descname"><span class="pre">TimeseriesElements</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable=()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesElements" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesGroup">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.types.timeseries_types.</span></span><span class="sig-name descname"><span class="pre">TimeseriesGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesGroup" title="Permalink to this definition"></a></dt>
 <dd><dl class="py attribute">
-<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesDataType.v">
-<span class="sig-name descname"><span class="pre">v</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesDataType.v" title="Permalink to this definition"></a></dt>
-<dd><p>Value of the data point.</p>
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesGroup.node_id">
+<span class="sig-name descname"><span class="pre">node_id</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesGroup.node_id" title="Permalink to this definition"></a></dt>
+<dd><p>Domain-unique identifier for the node.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>float</p>
+<dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesDataType.ts">
-<span class="sig-name descname"><span class="pre">ts</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesDataType.ts" title="Permalink to this definition"></a></dt>
-<dd><p>Date time string on the format YYYY-MM-DDThh:mm:ss±hh:mm.</p>
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesGroup.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesGroup.tag" title="Permalink to this definition"></a></dt>
+<dd><p>Name of the sensor for which the data belongs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesGroup.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesGroup.data" title="Permalink to this definition"></a></dt>
+<dd><p>A list (array) of data points as object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#evclient.types.timeseries_types.TimeseriesData" title="evclient.types.timeseries_types.TimeseriesData">evclient.types.timeseries_types.TimeseriesData</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -164,7 +207,7 @@
 <dd><p>Named wrapper attribute</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List[<a class="reference internal" href="#evclient.types.timeseries_types.TimeseriesType" title="evclient.types.timeseries_types.TimeseriesType">evclient.types.timeseries_types.TimeseriesType</a>]</p>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#evclient.types.timeseries_types.TimeseriesResponseGroup" title="evclient.types.timeseries_types.TimeseriesResponseGroup">evclient.types.timeseries_types.TimeseriesResponseGroup</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -172,11 +215,38 @@
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesType">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.types.timeseries_types.</span></span><span class="sig-name descname"><span class="pre">TimeseriesType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesType" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesResponseData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.types.timeseries_types.</span></span><span class="sig-name descname"><span class="pre">TimeseriesResponseData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesResponseData" title="Permalink to this definition"></a></dt>
 <dd><dl class="py attribute">
-<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesType.node_id">
-<span class="sig-name descname"><span class="pre">node_id</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesType.node_id" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesResponseData.v">
+<span class="sig-name descname"><span class="pre">v</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesResponseData.v" title="Permalink to this definition"></a></dt>
+<dd><p>Value of the data point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesResponseData.ts">
+<span class="sig-name descname"><span class="pre">ts</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesResponseData.ts" title="Permalink to this definition"></a></dt>
+<dd><p>Date time string on the format YYYY-MM-DDThh:mm:ss±hh:mm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesResponseGroup">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.types.timeseries_types.</span></span><span class="sig-name descname"><span class="pre">TimeseriesResponseGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesResponseGroup" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesResponseGroup.node_id">
+<span class="sig-name descname"><span class="pre">node_id</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesResponseGroup.node_id" title="Permalink to this definition"></a></dt>
 <dd><p>Domain-unique identifier for the node.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -186,8 +256,8 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesType.tag">
-<span class="sig-name descname"><span class="pre">tag</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesType.tag" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesResponseGroup.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesResponseGroup.tag" title="Permalink to this definition"></a></dt>
 <dd><p>Name of the sensor for which the data belongs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -197,12 +267,12 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesType.data">
-<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesType.data" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="evclient.types.timeseries_types.TimeseriesResponseGroup.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#evclient.types.timeseries_types.TimeseriesResponseGroup.data" title="Permalink to this definition"></a></dt>
 <dd><p>A list (array) of data points as object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List[<a class="reference internal" href="#evclient.types.timeseries_types.TimeseriesDataType" title="evclient.types.timeseries_types.TimeseriesDataType">evclient.types.timeseries_types.TimeseriesDataType</a>]</p>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#evclient.types.timeseries_types.TimeseriesResponseData" title="evclient.types.timeseries_types.TimeseriesResponseData">evclient.types.timeseries_types.TimeseriesResponseData</a>]</p>
 </dd>
 </dl>
 </dd></dl>
