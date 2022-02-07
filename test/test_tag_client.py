@@ -36,7 +36,7 @@ class TestTagClient(unittest.TestCase):
 
             res: TagResponse = self.client.get_tags()
 
-            self.assertEqual(res, mock_response)
+            self.assertEqual(res, mock_response.get("sensors"))
             self.assertEqual(len(responses.calls), 1)
 
             self.assertEqual(

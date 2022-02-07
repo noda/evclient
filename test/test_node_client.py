@@ -54,7 +54,7 @@ class TestNodeClient(unittest.TestCase):
 
             res: NodeResponse = self.client.get_nodes()
 
-            self.assertEqual(res, mock_response)
+            self.assertEqual(res, mock_response.get("nodes"))
             self.assertEqual(len(responses.calls), 1)
 
             self.assertEqual(
