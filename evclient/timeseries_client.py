@@ -5,11 +5,9 @@ from typing import List, Optional
 import requests
 
 from .types.timeseries_types import (
-    TimeseriesResponseData,
     TimeseriesResponseGroup,
     TimeseriesResponse,
     TimeseriesDataResponse,
-    TimeseriesData,
     TimeseriesGroup,
     TimeseriesElements
 )
