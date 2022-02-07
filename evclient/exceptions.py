@@ -2,6 +2,7 @@ class EVResponseError(Exception):
     def __init__(self, message='Unknown Error'):
         self.message = message
 
+
 class EVBadRequestException(EVResponseError):
     def __init__(self, message='Bad Request'):
         self.message = message
@@ -45,6 +46,7 @@ class EVInternalServerException(EVResponseError):
 class EVFatalErrorException(EVResponseError):
     def __init__(self, message='A fatal error occurred'):
         self.message = message
+
 
 class EVUnexpectedStatusCodeException(EVResponseError):
     def __init__(self, message="Server returned an unexpected status code"):

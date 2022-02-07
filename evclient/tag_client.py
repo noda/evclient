@@ -33,4 +33,6 @@ class TagClient(BaseClient):
             url=f'{self._url}/{self._tag_api_path}'
         )
         r = self._process_response(response)
+        if r is None:
+            return None
         return r.get("sensors")
