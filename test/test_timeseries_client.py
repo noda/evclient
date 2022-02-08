@@ -113,7 +113,7 @@ class TestTimeseriesClient(unittest.TestCase):
             'node_id': 1,
             'tag': 'outdoortemp',
             'value': 13.4,
-            'ts': '2019-10-01T11:30:22+02'
+            'ts': '2019-10-01T11:30:22+02:00'
         }
 
         responses.add(
