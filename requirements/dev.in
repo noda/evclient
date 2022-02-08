@@ -1,10 +1,8 @@
 -c pins.txt
 -c requirements.txt
+-r requirements.txt
 
-beartype
 responses
-pyRFC3339
-python-dateutil
 coverage
 flake8
 pre-commit
