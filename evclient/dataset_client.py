@@ -1,3 +1,4 @@
+import json
 from typing import List, Any
 
 import requests
@@ -112,11 +113,12 @@ class DatasetClient(BaseClient):
         )
         return self._process_response(response)
 
-    def get_dataset_content(self, dataset_uuid: str) -> Any:
+    def get_dataset_content(self, dataset_uuid: str, parse: bool = False) -> Any:
         """Fetches the raw content of a specific dataset from EnergyView API
 
         Args:
             dataset_uuid (str): The UUID of the data set.
+            parse (bool): Parse the result based on the Content-Type. Only applicable for JSON and YAML.
 
         Returns:
             Will return different results depending on the format of the raw content retrieved.
@@ -143,7 +145,9 @@ class DatasetClient(BaseClient):
         response: Response = self._session.get(
             url=f'{self._url}/{self._dataset_api_path}/{dataset_uuid}/raw'
         )
-        return self._process_response(response)
+        r = self._process_response(response)
+        # if response.headers.get("content-type") == "application/json":
+       	return r
 
     def update_dataset(self,
                        dataset_uuid: str,

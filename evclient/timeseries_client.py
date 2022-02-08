@@ -1,15 +1,20 @@
 import pyrfc3339
 import json
-from typing import List, Optional
+import datetime
+from typing import List, Optional, Union
+
+from beartype.roar import BeartypeDecorHintPep585DeprecationWarning
+from warnings import filterwarnings
+filterwarnings("ignore", category=BeartypeDecorHintPep585DeprecationWarning)
 
 import requests
+from beartype import beartype
 
 from .types.timeseries_types import (
     TimeseriesResponseGroup,
     TimeseriesResponse,
     TimeseriesDataResponse,
-    TimeseriesGroup,
-    TimeseriesElements
+    TimeseriesGroup
 )
 from .base_client import BaseClient
 from .utils import filter_none_values_from_dict
@@ -22,33 +27,30 @@ class TimeseriesClient(BaseClient):
     A client for handling the timeseries section of EnergyView API.
     """
 
+    @beartype
     def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None):
         super().__init__(domain, api_key, endpoint_url)
         self._timeseries_api_path: str = 'timeseries'
 
+    @beartype
     def get_timeseries_data(self,
-                            node_id: int = None,
-                            node_ids: List[int] = None,
-                            tag: str = None,
-                            tags: List[str] = None,
-                            start: str = None,
-                            end: str = None,
+                            node_ids: Union[int,List[int]] = None,
+                            tags: Union[str,List[str]] = None,
+                            start: datetime.datetime = None,
+                            end: datetime.datetime = None,
                             resolution: str = None,
                             aggregate: str = None,
                             epoch: bool = False
-                            ) -> TimeseriesElements:
+                            ) -> List[TimeseriesGroup]:
         """Fetches all timeseries data from EnergyView API
 
         Args:
-            node_id (Optional[int]): Filter on the unique identifier for a specific node.
-            node_ids (Optional[List[int]]): Filter on several unique node identifiers.
-                Can not be used together with node_id.
-            tag (Optional[str]): Filter on a sensor name.
-            tags (Optional[List[str]]): Filter on several sensor names. Can not be used together with tag.
-            start (Optional[str]): The from date time string on the format YYYY-MM-DDThh:mm:ss±hh:mm.
+            node_ids (Optional[Union[int,List[int]]]): Filter on one or several unique node identifiers.
+            tags (Optional[Union[str,List[str]]]): Filter on one or several sensor names.
+            start (Optional[datetime.datetime]): The from date-time of the query window.
                 Without timezone information, the API will fall back to the time zone configured for the domain.
                 Defaults to now.
-            end (Optional[str]): The from date time string on the format YYYY-MM-DDThh:mm:ss±hh:mm.
+            end (Optional[datetime.datetime]): The from date-time of the query window.
                 Without timezone information, the API will fall back to the time zone configured for the domain.
                 Defaults to now.
             resolution (Optional[str]): Truncates all timestamps to any of (options),
@@ -100,7 +102,7 @@ class TimeseriesClient(BaseClient):
                 which is the time 00:00:00 UTC on 1 January 1970.
 
         Returns:
-            :class:`.TimeseriesElements`
+            :class:`.List[TimeseriesGroup]`
 
         Raises:
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
@@ -110,6 +112,17 @@ class TimeseriesClient(BaseClient):
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
                                         from fulfilling the request.
         """
+
+        node_id = None
+        if isinstance(node_ids, int):
+            node_id = node_ids
+            node_ids = None
+
+        tag = None
+        if isinstance(tags, str):
+            tag = tags
+            tags = None
+
         response: Response = self._session.get(
             url=f'{self._url}/{self._timeseries_api_path}',
             params=filter_none_values_from_dict({
@@ -117,8 +130,8 @@ class TimeseriesClient(BaseClient):
                 'node_ids': json.dumps(node_ids) if node_ids else None,
                 'tag': tag,
                 'tags': json.dumps(tags) if tags else None,
-                'start': start,
-                'end': end,
+                'start': start.isoformat() if start is not None else None,
+                'end': end.isoformat() if end is not None else None,
                 'resolution': resolution,
                 'aggregate': aggregate,
                 'epoch': 1 if epoch else None,
@@ -144,11 +157,12 @@ class TimeseriesClient(BaseClient):
             } for obj in timeseries]
         return timeseries
 
+    @beartype
     def store_timeseries_data(self,
                               node_id: int,
                               tag: str,
                               val: float,
-                              ts: str,
+                              ts: datetime.datetime,
                               silent: bool = True
                               ) -> Optional[TimeseriesDataResponse]:
         """Store a single data point in a timeseries from EnergyView API
@@ -178,21 +192,22 @@ class TimeseriesClient(BaseClient):
                 'node_id': node_id,
                 'tag': tag,
                 'val': val,
-                'ts': ts,
+                'ts': ts.isoformat() if ts is not None else None,
                 'silent': 'true' if silent else None
             })
         )
         return self._process_response(response)
 
+    @beartype
     def store_multiple_timeseries_data(self,
                                        timeseries: List[TimeseriesGroup],
-                                       overwrite: str = None,
+                                       overwrite: bool = False,
                                        silent: bool = True,
-                                       ) -> Optional[TimeseriesElements]:
+                                       ) -> Optional[List[TimeseriesGroup]]:
         """Store multiple data points in multiple timeseries from EnergyView API
 
         Args:
-            timeseries (List[TimeseriesType]): A list of timeseries objects::
+            timeseries (List[TimeseriesGroup]): A list of timeseries objects::
 
                 [
                     {
@@ -208,17 +223,13 @@ class TimeseriesClient(BaseClient):
                     }
                 ]
 
-            overwrite (Optional[str]): Possible values are:
-
-                - replace_window
-
-                replace_window first deletes all datapoints between the lowest and highest ts (a >= x AND a <= y),
+            overwrite (Optional[bool]): Deletes all datapoints between the lowest and highest ts (a >= x AND a <= y),
                 for each node_id and corresponding tag. Then inserts all the new datapoints.
             silent (Optional[bool]): When set to true a call will only reply with status code 201 Created and an empty
                 reply instead of 200 Success and the inserted rows. Defaults to True.
 
         Returns:
-            :class:`.TimeseriesElements` or None depending on if the `silent` param is set.
+            :class:`.List[TimeseriesGroup]` or None depending on if the `silent` param is set.
 
         Raises:
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
@@ -232,8 +243,26 @@ class TimeseriesClient(BaseClient):
             url=f'{self._url}/{self._timeseries_api_path}',
             data=filter_none_values_from_dict({
                 'timeseries': json.dumps(timeseries),
-                'overwrite': overwrite,
+                'overwrite': "replace_window" if overwrite is True else None,
                 'silent': 'true' if silent else None
             })
         )
-        return self._process_response(response)
+
+        def parse_row(x):
+            return {
+                "ts": pyrfc3339.parse(x.get("ts")),
+                "v": x.get("v")
+            }
+
+        r: TimeseriesResponse = self._process_response(response)
+        if r is None:
+            return None
+
+        timeseries: List[TimeseriesResponseGroup] = r.get("timeseries")
+        if timeseries is not None:
+            timeseries = [{
+                "node_id": obj.get("node_id"),
+                "tag": obj.get("tag"),
+                "data": [parse_row(row) for row in obj.get("data", [])]
+            } for obj in timeseries]
+        return timeseries

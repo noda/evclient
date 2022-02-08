@@ -1,4 +1,7 @@
 -c pins.txt
 
+beartype
 requests
 pyRFC3339
+PyYAML
+python-dateutil

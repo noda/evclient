@@ -7,13 +7,9 @@ from typing import Dict, Any, Optional
 
 from evclient import (
     TimeseriesClient,
-    TimeseriesResponseData,
-    TimeseriesResponseGroup,
     TimeseriesResponse,
     TimeseriesDataResponse,
-    TimeseriesData,
-    TimeseriesGroup,
-    TimeseriesElements
+    TimeseriesResponseGroup
 )
 
 
@@ -68,12 +64,10 @@ class TestTimeseriesClient(unittest.TestCase):
 
         with self.subTest('call successful with complete parameter list'):
             params: Dict[str, Any] = {
-                'node_id': 1,
                 'node_ids': [1, 2],
-                'tag': 'outdoortemp',
                 'tags': ['outdoortemp, indoortemp'],
-                'start': '2020-01-01T00:05:57+01:00',
-                'end': '2020-01-01T00:05:57+01:00',
+                'start': pyrfc3339.parse('2020-01-01T00:05:57+01:00'),
+                'end': pyrfc3339.parse('2020-01-01T00:05:57+01:00'),
                 'resolution': 'second',
                 'aggregate': 'avg',
                 'epoch': True,
@@ -86,11 +80,16 @@ class TestTimeseriesClient(unittest.TestCase):
 
             expected_query_params: Dict[str, Any] = {
                 **params,
-                'node_id': str(params['node_id']),
                 'node_ids': json.dumps(params['node_ids']),
                 'tags': json.dumps(params['tags']),
                 'epoch': '1',
             }
+
+            print(responses.calls[0].request.url)
+            print(
+                f'{self.client._url}/{self.client._timeseries_api_path}'
+                f'?{urllib.parse.urlencode(expected_query_params)}'
+            )
 
             self.assertEqual(
                 responses.calls[0].request.url,
@@ -123,12 +122,20 @@ class TestTimeseriesClient(unittest.TestCase):
             status=200
         )
 
+        def parse_response(obj):
+            return {
+                "node_id": obj.get("node_id"),
+                "tag": obj.get("tag"),
+                "value": obj.get("value"),
+                "ts": pyrfc3339.parse(obj.get("ts"))
+            }
+
         with self.subTest('call successful with complete parameter list'):
             body: Dict[str, Any] = {
                 'node_id': 1,
                 'tag': 'outdoortemp',
                 'val': 13.4,
-                'ts': '2019-10-01T11:30:22+02'
+                'ts': pyrfc3339.parse('2019-10-01T11:30:22+02:00')
             }
 
             res: TimeseriesDataResponse = self.client.store_timeseries_data(**body)
@@ -144,11 +151,11 @@ class TestTimeseriesClient(unittest.TestCase):
             self.assertEqual(body_params['node_id'][0], str(body['node_id']))
             self.assertEqual(body_params['tag'][0], body['tag'])
             self.assertEqual(body_params['val'][0], str(body['val']))
-            self.assertEqual(body_params['ts'][0], body['ts'])
+            self.assertEqual(pyrfc3339.parse(body_params['ts'][0]), body['ts'])
 
     @responses.activate
     def test_store_multiple_timeseries_data(self) -> None:
-        timeseries: TimeseriesType = {
+        timeseries: TimeseriesResponseGroup = {
             'node_id': 1,
             'tag': 'outdoortemp',
             'data': [
@@ -174,16 +181,28 @@ class TestTimeseriesClient(unittest.TestCase):
             status=200
         )
 
+        def parse_response(x):
+            return [{
+                "node_id": obj.get("node_id"),
+                "tag": obj.get("tag"),
+                "data": [
+                    {
+                        "ts": pyrfc3339.parse(row.get("ts")),
+                        "v": row.get("v")
+                    } for row in obj.get("data", [])
+                ]
+            } for obj in x.get("timeseries", [])]
+
         with self.subTest('call successful with complete parameter list'):
             body: Dict[str, Any] = {
                 'timeseries': [timeseries],
-                'overwrite': 'replace_window',
-                'silent': 'true',
+                'overwrite': True,
+                'silent': False,
             }
 
             res: Optional[TimeseriesResponse] = self.client.store_multiple_timeseries_data(**body)
 
-            self.assertEqual(res, mock_response)
+            self.assertEqual(res, parse_response(mock_response))
             self.assertEqual(len(responses.calls), 1)
 
             self.assertEqual(
@@ -191,6 +210,7 @@ class TestTimeseriesClient(unittest.TestCase):
                 f'{self.client._url}/{self.client._timeseries_api_path}'
             )
             body_params: Dict[str, str] = urllib.parse.parse_qs(responses.calls[0].request.body)
+
             self.assertEqual(body_params['timeseries'][0], json.dumps(body['timeseries']))
-            self.assertEqual(body_params['overwrite'][0], body['overwrite'])
-            self.assertEqual(body_params['silent'][0], str(body['silent']))
+            self.assertEqual(body_params['overwrite'][0], 'replace_window' if body.get('overwrite') is True else None)
+            # self.assertEqual(body_params['silent'][0], 'true' if body.get('silent') else None)

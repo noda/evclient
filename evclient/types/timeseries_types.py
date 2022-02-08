@@ -72,5 +72,6 @@ class TimeseriesGroup(TypedDict):
     tag: str
     data: List[TimeseriesData]
 
+
 class TimeseriesElements(List[TimeseriesGroup]):
     pass

@@ -5,9 +5,10 @@ from typing import Type, Dict, Optional, Any
 
 import requests
 try:
-    from json.decoder import JSONDecodeError
-except ImportError:
-    JSONDecodeError = ValueError
+    import yaml
+    yaml_loaded = True
+except ModuleNotFoundError as e:
+    yaml_loaded = False
 
 from .exceptions import (
     EVBadRequestException,
@@ -121,16 +122,22 @@ class BaseClient:
             429: EVTooManyRequestsException,
         }
         if response.status_code < 400:
-            try:
-                return response.json()
-            except json.decoder.JSONDecodeError:
-                return response.content or None
+            if response.headers.get("content-type") == "application/json":
+                try:
+                    return response.json()
+                except json.decoder.JSONDecodeError:
+                    return response.content or None
+            elif response.headers.get("content-type") == "application/yaml" and yaml_loaded:
+                try:
+                    return yaml.safe_load(response.text)
+                except yaml.YAMLError:
+                    return response.content or None
         elif 400 <= response.status_code < 500:
             msg = None
             try:
                 if response.headers.get("content-type") == "application/json":
                     msg = response.json().get("error")
-            except JSONDecodeError:
+            except json.decoder.JSONDecodeError:
                 pass
             exception = responses.get(response.status_code, EVUnexpectedStatusCodeException)
             raise exception(msg)
