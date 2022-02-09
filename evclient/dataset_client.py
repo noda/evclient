@@ -1,4 +1,3 @@
-import json
 from typing import List, Any
 
 import requests
@@ -34,12 +33,13 @@ class DatasetClient(BaseClient):
             List[:class:`.DatasetType`]
 
         Raises:
+            :class:`.EVUnexpectedStatusCodeException`: Unexpected status code received.
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
             :class:`.EVUnauthorizedException`: Request was refused due to lacking authentication credentials.
             :class:`.EVForbiddenException`: Server understands the request but refuses to authorize it.
             :class:`.EVTooManyRequestsException`: Sent too many requests in a given amount of time.
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
-                                        from fulfilling the request.
+                from fulfilling the request.
         """
         response: Response = self._session.get(
             url=f'{self._url}/{self._dataset_api_path}',
@@ -71,12 +71,13 @@ class DatasetClient(BaseClient):
             :class:`.DatasetType`
 
         Raises:
+            :class:`.EVUnexpectedStatusCodeException`: Unexpected status code received.
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
             :class:`.EVUnauthorizedException`: Request was refused due to lacking authentication credentials.
             :class:`.EVForbiddenException`: Server understands the request but refuses to authorize it.
             :class:`.EVTooManyRequestsException`: Sent too many requests in a given amount of time.
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
-                                        from fulfilling the request.
+                from fulfilling the request.
         """
         response: Response = self._session.post(
             url=f'{self._url}/{self._dataset_api_path}',
@@ -100,13 +101,14 @@ class DatasetClient(BaseClient):
             :class:`.DatasetType`
 
         Raises:
+            :class:`.EVUnexpectedStatusCodeException`: Unexpected status code received.
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
             :class:`.EVUnauthorizedException`: Request was refused due to lacking authentication credentials.
             :class:`.EVForbiddenException`: Server understands the request but refuses to authorize it.
             :class:`.EVNotFoundException`: The requested resource was not found.
             :class:`.EVTooManyRequestsException`: Sent too many requests in a given amount of time.
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
-                                        from fulfilling the request.
+                from fulfilling the request.
         """
         response: Response = self._session.get(
             url=f'{self._url}/{self._dataset_api_path}/{dataset_uuid}'
@@ -134,20 +136,21 @@ class DatasetClient(BaseClient):
                 application/octet-stream: misc
 
         Raises:
+            :class:`.EVUnexpectedStatusCodeException`: Unexpected status code received.
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
             :class:`.EVUnauthorizedException`: Request was refused due to lacking authentication credentials.
             :class:`.EVForbiddenException`: Server understands the request but refuses to authorize it.
             :class:`.EVNotFoundException`: The requested resource was not found.
             :class:`.EVTooManyRequestsException`: Sent too many requests in a given amount of time.
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
-                                        from fulfilling the request.
+                from fulfilling the request.
         """
         response: Response = self._session.get(
             url=f'{self._url}/{self._dataset_api_path}/{dataset_uuid}/raw'
         )
         r = self._process_response(response)
         # if response.headers.get("content-type") == "application/json":
-       	return r
+        return r
 
     def update_dataset(self,
                        dataset_uuid: str,
@@ -169,12 +172,13 @@ class DatasetClient(BaseClient):
                 Uses the globally unique identifier (UUID) of a Node/Thing.
 
         Raises:
+            :class:`.EVUnexpectedStatusCodeException`: Unexpected status code received.
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
             :class:`.EVUnauthorizedException`: Request was refused due to lacking authentication credentials.
             :class:`.EVForbiddenException`: Server understands the request but refuses to authorize it.
             :class:`.EVTooManyRequestsException`: Sent too many requests in a given amount of time.
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
-                                        from fulfilling the request.
+                from fulfilling the request.
         """
         response: Response = self._session.put(
             url=f'{self._url}/{self._dataset_api_path}/{dataset_uuid}',
@@ -195,13 +199,14 @@ class DatasetClient(BaseClient):
             dataset_uuid (str): The UUID of the data set.
 
         Raises:
+            :class:`.EVUnexpectedStatusCodeException`: Unexpected status code received.
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
             :class:`.EVUnauthorizedException`: Request was refused due to lacking authentication credentials.
             :class:`.EVForbiddenException`: Server understands the request but refuses to authorize it.
             :class:`.EVNotFoundException`: The requested resource was not found.
             :class:`.EVTooManyRequestsException`: Sent too many requests in a given amount of time.
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
-                                        from fulfilling the request.
+                from fulfilling the request.
         """
         response: Response = self._session.delete(
             url=f'{self._url}/{self._dataset_api_path}/{dataset_uuid}'

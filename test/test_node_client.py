@@ -1,7 +1,9 @@
+from typing import List
+
 import responses
 import unittest
 
-from evclient import NodeClient, NodeResponse
+from evclient import NodeClient, NodeResponse, NodeType
 
 
 class TestNodeClient(unittest.TestCase):
@@ -14,7 +16,7 @@ class TestNodeClient(unittest.TestCase):
         )
 
     @responses.activate
-    def test_get_csv_imports(self) -> None:
+    def test_get_nodes(self) -> None:
         mock_response: NodeResponse = {
             'nodes': [
                 {
@@ -52,9 +54,9 @@ class TestNodeClient(unittest.TestCase):
                 status=200
             )
 
-            res: NodeResponse = self.client.get_nodes()
+            res: List[NodeType] = self.client.get_nodes()
 
-            self.assertEqual(res, mock_response.get("nodes"))
+            self.assertEqual(res, mock_response.get('nodes'))
             self.assertEqual(len(responses.calls), 1)
 
             self.assertEqual(
