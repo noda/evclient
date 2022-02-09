@@ -1,7 +1,9 @@
+from typing import List
+
 import responses
 import unittest
 
-from evclient import TagClient, TagResponse
+from evclient import TagClient, TagResponse, TagType
 
 
 class TestTagClient(unittest.TestCase):
@@ -14,7 +16,7 @@ class TestTagClient(unittest.TestCase):
         )
 
     @responses.activate
-    def test_get_csv_imports(self) -> None:
+    def test_get_tags(self) -> None:
         mock_response: TagResponse = {
             'sensors': [
                 {
@@ -34,9 +36,9 @@ class TestTagClient(unittest.TestCase):
                 status=200
             )
 
-            res: TagResponse = self.client.get_tags()
+            res: List[TagType] = self.client.get_tags()
 
-            self.assertEqual(res, mock_response.get("sensors"))
+            self.assertEqual(res, mock_response.get('sensors'))
             self.assertEqual(len(responses.calls), 1)
 
             self.assertEqual(

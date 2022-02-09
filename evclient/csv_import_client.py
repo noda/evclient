@@ -23,12 +23,13 @@ class CSVImportClient(BaseClient):
             :class:`.CSVImportResponse`
 
         Raises:
+            :class:`.EVUnexpectedStatusCodeException`: Unexpected status code received.
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
             :class:`.EVUnauthorizedException`: Request was refused due to lacking authentication credentials.
             :class:`.EVForbiddenException`: Server understands the request but refuses to authorize it.
             :class:`.EVTooManyRequestsException`: Sent too many requests in a given amount of time.
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
-                                        from fulfilling the request.
+                from fulfilling the request.
         """
         response: Response = self._session.get(
             url=f'{self._url}/{self._csv_import_api_path}'
@@ -43,13 +44,14 @@ class CSVImportClient(BaseClient):
             csv_file (TextIO): The file to upload.
 
         Raises:
+            :class:`.EVUnexpectedStatusCodeException`: Unexpected status code received.
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
             :class:`.EVUnauthorizedException`: Request was refused due to lacking authentication credentials.
             :class:`.EVForbiddenException`: Server understands the request but refuses to authorize it.
             :class:`.EVNotFoundException`: The requested resource was not found.
             :class:`.EVTooManyRequestsException`: Sent too many requests in a given amount of time.
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
-                                        from fulfilling the request.
+                from fulfilling the request.
         """
         response: Response = self._session.post(
             url=f'{self._url}/{self._csv_import_api_path}/{import_uuid}',

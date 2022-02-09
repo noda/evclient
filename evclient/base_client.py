@@ -3,12 +3,9 @@ import os
 import logging
 from typing import Type, Dict, Optional, Any
 
+import yaml
 import requests
-try:
-    import yaml
-    yaml_loaded = True
-except ModuleNotFoundError as e:
-    yaml_loaded = False
+
 
 from .exceptions import (
     EVBadRequestException,
@@ -34,6 +31,16 @@ class BaseClient:
     Should only be used as an abstract class.
     """
 
+    responses: Dict[int, Type[Exception]] = {
+        400: EVBadRequestException,
+        401: EVUnauthorizedException,
+        402: EVRequestFailedException,
+        403: EVForbiddenException,
+        404: EVNotFoundException,
+        409: EVConflictException,
+        429: EVTooManyRequestsException,
+    }
+
     def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None) -> None:
         """BaseClient constructor
 
@@ -57,13 +64,12 @@ class BaseClient:
             :class:`.EVFatalErrorException`: The client could not find a specified domain
                 or api key for the EnergyView API
         """
-        if endpoint_url is not None:
+        if endpoint_url:
             self._base_url: str = endpoint_url
         elif os.environ.get('EV_ENDPOINT_URL'):
             self._base_url: str = os.environ.get('EV_ENDPOINT_URL')
         else:
             self._base_url: str = 'https://customer.noda.se'
-            self._api_root: str = 'api'
 
         self._api_root: str = 'api'
         self._api_version: str = 'v1'
@@ -75,8 +81,6 @@ class BaseClient:
         else:
             raise EVFatalErrorException('No domain provided to EVClient')
 
-        self._url: str = f'{self._base_url}/{self._domain}/{self._api_root}/{self._api_version}'
-
         self._session = requests.Session()
         self._session.headers = {'Accept': 'application/json'}
         if api_key:
@@ -85,6 +89,19 @@ class BaseClient:
             self._session.headers['Authorization'] = f'Key {os.environ.get("EV_API_KEY")}'
         else:
             raise EVFatalErrorException('No api key provided to EVClient')
+
+        self._url: str = f'{self._base_url}/{self._domain}/{self._api_root}/{self._api_version}'
+
+    def _handle_successful_response(self, response: Response) -> Optional[Any]:
+        if response.headers.get('content-type') == 'application/yaml':
+            try:
+                return yaml.safe_load(response.text)
+            except yaml.YAMLError:
+                return response.content or None
+        try:
+            return response.json()
+        except json.decoder.JSONDecodeError:
+            return response.content or None
 
     def _process_response(self, response: Response) -> Optional[Any]:
         """Process the response from EnergyView API
@@ -96,6 +113,7 @@ class BaseClient:
             response: requests.model.Response object
 
         Raises:
+            :class:`.EVUnexpectedStatusCodeException`: Unexpected status code received.
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
             :class:`.EVUnauthorizedException`: Request was refused due to lacking authentication credentials.
             :class:`.EVRequestFailedException`: The parameters were valid but the request failed.
@@ -104,7 +122,7 @@ class BaseClient:
             :class:`.EVConflictException`: The request conflicts with the current state of the target resource.
             :class:`.EVTooManyRequestsException`: Sent too many requests in a given amount of time.
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
-                                        from fulfilling the request.
+                from fulfilling the request.
         """
         logger.debug(
             f'API Request sent:\n'
@@ -112,26 +130,9 @@ class BaseClient:
             f'Body: {response.request.body}\n'
             f'Status Code: {response.status_code}'
         )
-        responses: Dict[int, Type[Exception]] = {
-            400: EVBadRequestException,
-            401: EVUnauthorizedException,
-            402: EVRequestFailedException,
-            403: EVForbiddenException,
-            404: EVNotFoundException,
-            409: EVConflictException,
-            429: EVTooManyRequestsException,
-        }
+
         if response.status_code < 400:
-            if response.headers.get("content-type") == "application/json":
-                try:
-                    return response.json()
-                except json.decoder.JSONDecodeError:
-                    return response.content or None
-            elif response.headers.get("content-type") == "application/yaml" and yaml_loaded:
-                try:
-                    return yaml.safe_load(response.text)
-                except yaml.YAMLError:
-                    return response.content or None
+            return self._handle_successful_response(response)
         elif 400 <= response.status_code < 500:
             msg = None
             try:
@@ -139,7 +140,7 @@ class BaseClient:
                     msg = response.json().get("error")
             except json.decoder.JSONDecodeError:
                 pass
-            exception = responses.get(response.status_code, EVUnexpectedStatusCodeException)
+            exception = self.responses.get(response.status_code, EVUnexpectedStatusCodeException)
             raise exception(msg)
         else:
             raise EVInternalServerException

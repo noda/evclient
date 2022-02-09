@@ -1,8 +1,11 @@
+import json
 import os
+from typing import TextIO
 
 import requests
 import responses
 import unittest
+import yaml
 
 from evclient import BaseClient
 from evclient import (
@@ -24,6 +27,14 @@ class TestBaseClient(unittest.TestCase):
     def setUp(self) -> None:
         self.domain: str = 'test'
         self.api_key: str = '123456789'
+
+        self.file: TextIO = open('testfile.yaml', 'w+')
+        yaml.dump({'header': []}, self.file, default_flow_style=False, allow_unicode=True)
+        self.file.close()
+
+    def tearDown(self) -> None:
+        self.file.close()
+        os.remove('testfile.yaml')
 
     def test_credentials_from_input_params(self) -> None:
         client: BaseClient = BaseClient(
@@ -81,11 +92,73 @@ class TestBaseClient(unittest.TestCase):
         self.assertEqual(responses.calls[0].request.headers.get('Authorization'), f'Key {self.api_key}')
 
     @responses.activate
+    def test_handle_successful_response(self) -> None:
+        client: BaseClient = BaseClient(
+            domain=self.domain,
+            api_key=self.api_key
+        )
+
+        with self.subTest('Returns parsed yaml'):
+            with open(self.file.name) as file:
+                file_content = yaml.safe_load(file)
+                responses.add(
+                    responses.GET,
+                    url=client._base_url,
+                    body=json.dumps(file_content).encode('utf-8'),
+                    content_type='application/yaml',
+                    status=200
+                )
+                response: Response = requests.get(client._base_url)
+                self.assertEqual(client._handle_successful_response(response), file_content)
+
+        with self.subTest('Returns None'):
+            responses.add(
+                responses.GET,
+                url=client._base_url,
+                status=200
+            )
+            response: Response = requests.get(client._base_url)
+            self.assertEqual(client._handle_successful_response(response), None)
+
+        with self.subTest('Returns content in bytes'):
+            responses.add(
+                responses.GET,
+                url=client._base_url,
+                body='not json, but valid body',
+                status=200
+            )
+            response: Response = requests.get(client._base_url)
+            self.assertEqual(client._handle_successful_response(response).decode('utf-8'), 'not json, but valid body')
+
+        with self.subTest('Returns valid json'):
+            responses.add(
+                responses.GET,
+                url=client._base_url,
+                json={},
+                status=200
+            )
+            response: Response = requests.get(client._base_url)
+            self.assertEqual(client._handle_successful_response(response), {})
+
+    @responses.activate
     def test_process_response(self) -> None:
         client: BaseClient = BaseClient(
             domain=self.domain,
             api_key=self.api_key
         )
+
+        with self.subTest('Returns parsed yaml'):
+            with open(self.file.name) as file:
+                file_content = yaml.safe_load(file)
+                responses.add(
+                    responses.GET,
+                    url=client._base_url,
+                    body=json.dumps(file_content).encode('utf-8'),
+                    content_type='application/yaml',
+                    status=200
+                )
+                response: Response = requests.get(client._base_url)
+                self.assertEqual(client._handle_successful_response(response), file_content)
 
         with self.subTest('OK status code and returns valid json'):
             responses.add(

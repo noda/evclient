@@ -1,14 +1,12 @@
-import pyrfc3339
 import json
 import datetime
 from typing import List, Optional, Union
 
+import requests
+import pyrfc3339
+from beartype import beartype
 from beartype.roar import BeartypeDecorHintPep585DeprecationWarning
 from warnings import filterwarnings
-filterwarnings("ignore", category=BeartypeDecorHintPep585DeprecationWarning)
-
-import requests
-from beartype import beartype
 
 from .types.timeseries_types import (
     TimeseriesResponseGroup,
@@ -19,6 +17,7 @@ from .types.timeseries_types import (
 from .base_client import BaseClient
 from .utils import filter_none_values_from_dict
 
+filterwarnings("ignore", category=BeartypeDecorHintPep585DeprecationWarning)
 Response = requests.models.Response
 
 
@@ -34,8 +33,8 @@ class TimeseriesClient(BaseClient):
 
     @beartype
     def get_timeseries_data(self,
-                            node_ids: Union[int,List[int]] = None,
-                            tags: Union[str,List[str]] = None,
+                            node_ids: Union[int, List[int]] = None,
+                            tags: Union[str, List[str]] = None,
                             start: datetime.datetime = None,
                             end: datetime.datetime = None,
                             resolution: str = None,
@@ -105,12 +104,13 @@ class TimeseriesClient(BaseClient):
             :class:`.List[TimeseriesGroup]`
 
         Raises:
+            :class:`.EVUnexpectedStatusCodeException`: Unexpected status code received.
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
             :class:`.EVUnauthorizedException`: Request was refused due to lacking authentication credentials.
             :class:`.EVForbiddenException`: Server understands the request but refuses to authorize it.
             :class:`.EVTooManyRequestsException`: Sent too many requests in a given amount of time.
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
-                                        from fulfilling the request.
+                from fulfilling the request.
         """
 
         node_id = None
@@ -179,12 +179,13 @@ class TimeseriesClient(BaseClient):
             :class:`.TimeseriesDataResponse` or None depending on if the `silent` param is set.
 
         Raises:
+            :class:`.EVUnexpectedStatusCodeException`: Unexpected status code received.
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
             :class:`.EVUnauthorizedException`: Request was refused due to lacking authentication credentials.
             :class:`.EVForbiddenException`: Server understands the request but refuses to authorize it.
             :class:`.EVTooManyRequestsException`: Sent too many requests in a given amount of time.
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
-                                        from fulfilling the request.
+                from fulfilling the request.
         """
         response: Response = self._session.post(
             url=f'{self._url}/{self._timeseries_api_path}',
@@ -232,12 +233,13 @@ class TimeseriesClient(BaseClient):
             :class:`.List[TimeseriesGroup]` or None depending on if the `silent` param is set.
 
         Raises:
+            :class:`.EVUnexpectedStatusCodeException`: Unexpected status code received.
             :class:`.EVBadRequestException`: Sent request had insufficient data or invalid options.
             :class:`.EVUnauthorizedException`: Request was refused due to lacking authentication credentials.
             :class:`.EVForbiddenException`: Server understands the request but refuses to authorize it.
             :class:`.EVTooManyRequestsException`: Sent too many requests in a given amount of time.
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
-                                        from fulfilling the request.
+                from fulfilling the request.
         """
         response: Response = self._session.post(
             url=f'{self._url}/{self._timeseries_api_path}',
