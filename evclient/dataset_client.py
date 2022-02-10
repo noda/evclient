@@ -1,11 +1,15 @@
-from typing import List, Any
+from warnings import filterwarnings
+from typing import List, Any, Optional
 
 import requests
+from beartype import beartype
+from beartype.roar import BeartypeDecorHintPep585DeprecationWarning
 
 from .types.dataset_types import DatasetType
 from .base_client import BaseClient
 from .utils import filter_none_values_from_dict
 
+filterwarnings("ignore", category=BeartypeDecorHintPep585DeprecationWarning)
 Response = requests.models.Response
 
 
@@ -14,13 +18,19 @@ class DatasetClient(BaseClient):
     A client for handling the dataset section of EnergyView API.
     """
 
-    def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None):
+    @beartype
+    def __init__(self,
+                 domain: Optional[str] = None,
+                 api_key: Optional[str] = None,
+                 endpoint_url: Optional[str] = None
+                 ) -> None:
         super().__init__(domain, api_key, endpoint_url)
         self._dataset_api_path: str = 'dataset'
 
+    @beartype
     def get_datasets(self,
-                     offset: int = None,
-                     limit: int = None
+                     offset: Optional[int] = None,
+                     limit: Optional[int] = None
                      ) -> List[DatasetType]:
         """Fetches datasets from EnergyView API
 
@@ -50,12 +60,13 @@ class DatasetClient(BaseClient):
         )
         return self._process_response(response)
 
+    @beartype
     def create_dataset(self,
                        content: str,
                        dataset_format: str,
                        name: str,
-                       tags: List[str] = None,
-                       thing_uuid: str = None
+                       tags: Optional[List[str]] = None,
+                       thing_uuid: Optional[str] = None
                        ) -> DatasetType:
         """Create a dataset in EnergyView API
 
@@ -91,6 +102,7 @@ class DatasetClient(BaseClient):
         )
         return self._process_response(response)
 
+    @beartype
     def get_dataset(self, dataset_uuid: str) -> DatasetType:
         """Fetches a specific dataset from EnergyView API by uuid
 
@@ -115,6 +127,7 @@ class DatasetClient(BaseClient):
         )
         return self._process_response(response)
 
+    @beartype
     def get_dataset_content(self, dataset_uuid: str) -> Any:
         """Fetches the raw content of a specific dataset from EnergyView API
 
@@ -149,13 +162,14 @@ class DatasetClient(BaseClient):
         )
         return self._process_response(response)
 
+    @beartype
     def update_dataset(self,
                        dataset_uuid: str,
-                       content: str = None,
-                       dataset_format: str = None,
-                       name: str = None,
-                       tags: List[str] = None,
-                       thing_uuid: str = None
+                       content: Optional[str] = None,
+                       dataset_format: Optional[str] = None,
+                       name: Optional[str] = None,
+                       tags: Optional[List[str]] = None,
+                       thing_uuid: Optional[str] = None
                        ) -> None:
         """Update a dataset in EnergyView API
 
@@ -189,6 +203,7 @@ class DatasetClient(BaseClient):
         )
         return self._process_response(response)
 
+    @beartype
     def delete_dataset(self, dataset_uuid: str) -> None:
         """Deletes a specific dataset from EnergyView API by uuid
 
