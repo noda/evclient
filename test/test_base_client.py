@@ -27,6 +27,7 @@ class TestBaseClient(unittest.TestCase):
     def setUp(self) -> None:
         self.domain: str = 'test'
         self.api_key: str = '123456789'
+        self.endpoint_url: str = 'http://127.0.0.1'
 
         self.file: TextIO = open('testfile.yaml', 'w+')
         yaml.dump({'header': []}, self.file, default_flow_style=False, allow_unicode=True)
@@ -39,9 +40,11 @@ class TestBaseClient(unittest.TestCase):
     def test_credentials_from_input_params(self) -> None:
         client: BaseClient = BaseClient(
             domain=self.domain,
-            api_key=self.api_key
+            api_key=self.api_key,
+            endpoint_url=self.endpoint_url
         )
         self.assertEqual(client._domain, self.domain)
+        self.assertEqual(client._base_url, self.endpoint_url)
         self.assertEqual(client._session.headers, {
             'Authorization': f'Key {self.api_key}',
             'Accept': 'application/json'
@@ -50,10 +53,12 @@ class TestBaseClient(unittest.TestCase):
     @unittest.mock.patch.dict(os.environ, {
         'EV_DOMAIN': 'test',
         'EV_API_KEY': '123456789',
+        'EV_ENDPOINT_URL': 'http://127.0.0.1'
     })
     def test_credentials_from_env_vars(self) -> None:
         client: BaseClient = BaseClient()
         self.assertEqual(client._domain, 'test')
+        self.assertEqual(client._base_url, 'http://127.0.0.1')
         self.assertEqual(client._session.headers, {
             'Authorization': 'Key 123456789',
             'Accept': 'application/json'
@@ -70,6 +75,14 @@ class TestBaseClient(unittest.TestCase):
     })
     def test_credentials_from_env_vars_no_domain(self) -> None:
         self.assertRaises(EVFatalErrorException, BaseClient)
+
+    @unittest.mock.patch.dict(os.environ, {
+        'EV_DOMAIN': 'test',
+        'EV_API_KEY': '123456789',
+    })
+    def test_credentials_from_env_vars_no_endpoint_url(self) -> None:
+        client: BaseClient = BaseClient()
+        self.assertEqual(client._base_url, 'https://customer.noda.se')
 
     @responses.activate
     def test_request_auth_header_is_set(self) -> None:

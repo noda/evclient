@@ -11,8 +11,11 @@ from warnings import filterwarnings
 from .types.timeseries_types import (
     TimeseriesResponseGroup,
     TimeseriesResponse,
-    TimeseriesDataResponse,
-    TimeseriesGroup
+    StoreTimeseriesResponse,
+    TimeseriesGroup,
+    TimeseriesResponseData,
+    TimeseriesData,
+    StoreTimeseriesData
 )
 from .base_client import BaseClient
 from .utils import filter_none_values_from_dict
@@ -26,7 +29,6 @@ class TimeseriesClient(BaseClient):
     A client for handling the timeseries section of EnergyView API.
     """
 
-    @beartype
     def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None):
         super().__init__(domain, api_key, endpoint_url)
         self._timeseries_api_path: str = 'timeseries'
@@ -101,7 +103,7 @@ class TimeseriesClient(BaseClient):
                 which is the time 00:00:00 UTC on 1 January 1970.
 
         Returns:
-            :class:`.List[TimeseriesGroup]`
+            List[:class:`.TimeseriesGroup`]
 
         Raises:
             :class:`.EVUnexpectedStatusCodeException`: Unexpected status code received.
@@ -112,6 +114,12 @@ class TimeseriesClient(BaseClient):
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
                 from fulfilling the request.
         """
+
+        def parse_row(row: TimeseriesResponseData) -> TimeseriesData:
+            return {
+                'ts': pyrfc3339.parse(row.get('ts')),
+                'v': row.get('v')
+            }
 
         node_id = None
         if isinstance(node_ids, int):
@@ -138,22 +146,16 @@ class TimeseriesClient(BaseClient):
             })
         )
 
-        def parse_row(x):
-            return {
-                "ts": pyrfc3339.parse(x.get("ts")),
-                "v": x.get("v")
-            }
-
         r: TimeseriesResponse = self._process_response(response)
         if r is None:
-            return None
+            return []
 
-        timeseries: List[TimeseriesResponseGroup] = r.get("timeseries")
+        timeseries: List[TimeseriesResponseGroup] = r.get('timeseries', [])
         if timeseries is not None:
-            timeseries = [{
-                "node_id": obj.get("node_id"),
-                "tag": obj.get("tag"),
-                "data": [parse_row(row) for row in obj.get("data", [])]
+            timeseries: List[TimeseriesGroup] = [{
+                'node_id': obj.get('node_id'),
+                "tag": obj.get('tag'),
+                'data': [parse_row(row) for row in obj.get('data', [])]
             } for obj in timeseries]
         return timeseries
 
@@ -164,19 +166,19 @@ class TimeseriesClient(BaseClient):
                               val: float,
                               ts: datetime.datetime,
                               silent: bool = True
-                              ) -> Optional[TimeseriesDataResponse]:
+                              ) -> Optional[StoreTimeseriesData]:
         """Store a single data point in a timeseries from EnergyView API
 
         Args:
             node_id (int): Domain-unique id for the node.
             tag (str): The name of the tag / sensor as declared in EnergyView. Such as outdoortemp, indoortemp etc.
             val (float): The value to store.
-            ts (str): The date time of the data point as string on the format YYYY-MM-DDThh:mm:ss±hh:mm.
+            ts (datetime): The date time of the data point in the format YYYY-MM-DDThh:mm:ss±hh:mm.
                 Without timezone information, the API will fall back to the time zone configured for the domain.
-            silent (bool): Reply with 201 and an empty body instead of the inserted content.
+            silent (bool): Return None instead of the inserted content.
 
         Returns:
-            :class:`.TimeseriesDataResponse` or None depending on if the `silent` param is set.
+            :class:`.StoreTimeseriesData` or None depending on if the `silent` param is set.
 
         Raises:
             :class:`.EVUnexpectedStatusCodeException`: Unexpected status code received.
@@ -197,7 +199,15 @@ class TimeseriesClient(BaseClient):
                 'silent': 'true' if silent else None
             })
         )
-        return self._process_response(response)
+        if silent:
+            return None
+        response_data: StoreTimeseriesResponse = self._process_response(response)
+        return {
+            'node_id': response_data['node_id'],
+            'tag': response_data['tag'],
+            'value': response_data['value'],
+            'ts': pyrfc3339.parse(response_data['ts'])
+        }
 
     @beartype
     def store_multiple_timeseries_data(self,
@@ -230,7 +240,7 @@ class TimeseriesClient(BaseClient):
                 reply instead of 200 Success and the inserted rows. Defaults to True.
 
         Returns:
-            :class:`.List[TimeseriesGroup]` or None depending on if the `silent` param is set.
+            List[:class:`.TimeseriesGroup`] or None depending on if the `silent` param is set.
 
         Raises:
             :class:`.EVUnexpectedStatusCodeException`: Unexpected status code received.
@@ -241,6 +251,13 @@ class TimeseriesClient(BaseClient):
             :class:`.EVInternalServerException`: Server encountered an unexpected condition that prevented it
                 from fulfilling the request.
         """
+
+        def parse_row(row: TimeseriesResponseData) -> TimeseriesData:
+            return {
+                'ts': pyrfc3339.parse(row.get('ts')),
+                'v': row.get('v')
+            }
+
         response: Response = self._session.post(
             url=f'{self._url}/{self._timeseries_api_path}',
             data=filter_none_values_from_dict({
@@ -250,21 +267,15 @@ class TimeseriesClient(BaseClient):
             })
         )
 
-        def parse_row(x):
-            return {
-                "ts": pyrfc3339.parse(x.get("ts")),
-                "v": x.get("v")
-            }
-
         r: TimeseriesResponse = self._process_response(response)
-        if r is None:
+        if r is None or silent:
             return None
 
-        timeseries: List[TimeseriesResponseGroup] = r.get("timeseries")
+        timeseries: List[TimeseriesResponseGroup] = r.get('timeseries')
         if timeseries is not None:
-            timeseries = [{
-                "node_id": obj.get("node_id"),
-                "tag": obj.get("tag"),
-                "data": [parse_row(row) for row in obj.get("data", [])]
+            timeseries: List[TimeseriesGroup] = [{
+                'node_id': obj.get('node_id'),
+                'tag': obj.get('tag'),
+                'data': [parse_row(row) for row in obj.get('data', [])]
             } for obj in timeseries]
         return timeseries

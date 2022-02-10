@@ -6,7 +6,7 @@ try:
 except ImportError:
     from typing_extensions import TypedDict
 
-    
+
 class TimeseriesResponseData(TypedDict):
     """
     Attributes:
@@ -37,7 +37,7 @@ class TimeseriesResponse(TypedDict):
     timeseries: List[TimeseriesResponseGroup]
 
 
-class TimeseriesDataResponse(TypedDict):
+class StoreTimeseriesResponse(TypedDict):
     """
     Attributes:
         node_id: Domain-unique id for the node.
@@ -51,6 +51,20 @@ class TimeseriesDataResponse(TypedDict):
     ts: str
 
 
+class StoreTimeseriesData(TypedDict):
+    """
+    Attributes:
+        node_id: Domain-unique id for the node.
+        tag: The name of the tag / sensor as declared in EnergyView.
+        v: Value of the data point.
+        ts: Date time object.
+    """
+    node_id: int
+    tag: str
+    value: float
+    ts: datetime.datetime
+
+
 class TimeseriesData(TypedDict):
     """
     Attributes:
@@ -60,18 +74,14 @@ class TimeseriesData(TypedDict):
     v: float
     ts: datetime.datetime
 
-    
+
 class TimeseriesGroup(TypedDict):
     """
     Attributes:
         node_id: Domain-unique identifier for the node.
         tag: Name of the sensor for which the data belongs.
-        data: A list (array) of data points as object.        
+        data: A list (array) of data points as object.
     """
     node_id: int
     tag: str
     data: List[TimeseriesData]
-
-
-class TimeseriesElements(List[TimeseriesGroup]):
-    pass
