@@ -37,10 +37,10 @@ from .types.timeseries_types import (
     TimeseriesResponseData,
     TimeseriesResponseGroup,
     TimeseriesResponse,
-    TimeseriesDataResponse,
+    StoreTimeseriesResponse,
+    StoreTimeseriesData,
     TimeseriesData,
-    TimeseriesGroup,
-    TimeseriesElements
+    TimeseriesGroup
 )
 from .types.dataset_types import DatasetType
 
