@@ -87,6 +87,183 @@
              
   <section id="timeseries-client">
 <h1>Timeseries Client<a class="headerlink" href="#timeseries-client" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="evclient.timeseries_client.TimeseriesClient">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.timeseries_client.</span></span><span class="sig-name descname"><span class="pre">TimeseriesClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endpoint_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.timeseries_client.TimeseriesClient" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="base_client.html#evclient.base_client.BaseClient" title="evclient.base_client.BaseClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">evclient.base_client.BaseClient</span></code></a></p>
+<p>A client for handling the timeseries section of EnergyView API.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="evclient.timeseries_client.TimeseriesClient.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endpoint_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#evclient.timeseries_client.TimeseriesClient.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>BaseClient constructor</p>
+<p>Defines the base url and customer domain for the EnergyView API and sets headers in a new
+requests session.</p>
+<p>Will look for the following environment variables if parameters are omitted:</p>
+<p>EV_DOMAIN</p>
+<p>EV_API_KEY</p>
+<p>EV_ENDPOINT_URL</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The EnergyView domain to make requests to.</p></li>
+<li><p><strong>api_key</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – API Key for the selected EnergyView domain.</p></li>
+<li><p><strong>endpoint_url</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Alternative EnergyView URL</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVFatalErrorException" title="evclient.exceptions.EVFatalErrorException"><strong>EVFatalErrorException</strong></a> – The client could not find a specified domain
+    or api key for the EnergyView API</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="evclient.timeseries_client.TimeseriesClient.get_timeseries_data">
+<span class="sig-name descname"><span class="pre">get_timeseries_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggregate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epoch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../types/timeseries_types.html#evclient.types.timeseries_types.TimeseriesGroup" title="evclient.types.timeseries_types.TimeseriesGroup"><span class="pre">evclient.types.timeseries_types.TimeseriesGroup</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#evclient.timeseries_client.TimeseriesClient.get_timeseries_data" title="Permalink to this definition"></a></dt>
+<dd><p>Fetches all timeseries data from EnergyView API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node_ids</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>int</em><em>,</em><em>List</em><em>[</em><em>int</em><em>]</em><em>]</em><em>]</em>) – Filter on one or several unique node identifiers.</p></li>
+<li><p><strong>tags</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>str</em><em>,</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>]</em>) – Filter on one or several sensor names.</p></li>
+<li><p><strong>start</strong> (<em>Optional</em><em>[</em><em>datetime.datetime</em><em>]</em>) – The from date-time of the query window.
+Without timezone information, the API will fall back to the time zone configured for the domain.
+Defaults to now.</p></li>
+<li><p><strong>end</strong> (<em>Optional</em><em>[</em><em>datetime.datetime</em><em>]</em>) – The from date-time of the query window.
+Without timezone information, the API will fall back to the time zone configured for the domain.
+Defaults to now.</p></li>
+<li><p><strong>resolution</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – <p>Truncates all timestamps to any of (options),
+then computes the average for all points within the truncated period.</p>
+<ul>
+<li><p>second</p></li>
+<li><p>minute</p></li>
+<li><p>5minute</p></li>
+<li><p>10minute</p></li>
+<li><p>15minute</p></li>
+<li><p>20minute</p></li>
+<li><p>30minute</p></li>
+<li><p>hour</p></li>
+<li><p>day</p></li>
+<li><p>month</p></li>
+<li><p>year</p></li>
+<li><p>decade</p></li>
+<li><p>century</p></li>
+<li><p>millennia</p></li>
+</ul>
+</p></li>
+<li><p><strong>aggregate</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – <p>When using resolution, select this aggregate function
+instead of the default avg when computing the result.</p>
+<ul>
+<li><p>avg</p></li>
+<li><p>min</p></li>
+<li><p>max</p></li>
+<li><p>sum</p></li>
+<li><p>count</p></li>
+</ul>
+</p></li>
+<li><p><strong>epoch</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – When set to True, the ts field will be in Unix timestamp format (numeric)
+instead of a string. This is the number of seconds that have elapsed since the Unix epoch,
+which is the time 00:00:00 UTC on 1 January 1970.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List[<a class="reference internal" href="../types/timeseries_types.html#evclient.types.timeseries_types.TimeseriesGroup" title="evclient.types.timeseries_types.TimeseriesGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeseriesGroup</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVUnexpectedStatusCodeException" title="evclient.exceptions.EVUnexpectedStatusCodeException"><strong>EVUnexpectedStatusCodeException</strong></a> – Unexpected status code received.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVBadRequestException" title="evclient.exceptions.EVBadRequestException"><strong>EVBadRequestException</strong></a> – Sent request had insufficient data or invalid options.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVUnauthorizedException" title="evclient.exceptions.EVUnauthorizedException"><strong>EVUnauthorizedException</strong></a> – Request was refused due to lacking authentication credentials.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVForbiddenException" title="evclient.exceptions.EVForbiddenException"><strong>EVForbiddenException</strong></a> – Server understands the request but refuses to authorize it.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVTooManyRequestsException" title="evclient.exceptions.EVTooManyRequestsException"><strong>EVTooManyRequestsException</strong></a> – Sent too many requests in a given amount of time.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVInternalServerException" title="evclient.exceptions.EVInternalServerException"><strong>EVInternalServerException</strong></a> – Server encountered an unexpected condition that prevented it
+    from fulfilling the request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="evclient.timeseries_client.TimeseriesClient.store_multiple_timeseries_data">
+<span class="sig-name descname"><span class="pre">store_multiple_timeseries_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeseries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../types/timeseries_types.html#evclient.types.timeseries_types.TimeseriesGroup" title="evclient.types.timeseries_types.TimeseriesGroup"><span class="pre">evclient.types.timeseries_types.TimeseriesGroup</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">silent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../types/timeseries_types.html#evclient.types.timeseries_types.TimeseriesGroup" title="evclient.types.timeseries_types.TimeseriesGroup"><span class="pre">evclient.types.timeseries_types.TimeseriesGroup</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#evclient.timeseries_client.TimeseriesClient.store_multiple_timeseries_data" title="Permalink to this definition"></a></dt>
+<dd><p>Store multiple data points in multiple timeseries from EnergyView API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timeseries</strong> (<em>List</em><em>[</em><a class="reference internal" href="../types/timeseries_types.html#evclient.types.timeseries_types.TimeseriesGroup" title="evclient.types.timeseries_types.TimeseriesGroup"><em>TimeseriesGroup</em></a><em>]</em>) – <p>A list of timeseries objects:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;node_id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">&#39;tag&#39;</span><span class="p">:</span> <span class="s1">&#39;outdoortemp&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[{</span>
+            <span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="mf">2.6</span><span class="p">,</span>
+            <span class="s1">&#39;ts&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=&lt;</span><span class="n">UTC</span><span class="o">+</span><span class="mi">01</span><span class="p">:</span><span class="mi">00</span><span class="o">&gt;</span><span class="p">)</span>
+        <span class="p">},{</span>
+            <span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="mf">2.6</span><span class="p">,</span>
+            <span class="s1">&#39;ts&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=&lt;</span><span class="n">UTC</span><span class="o">+</span><span class="mi">01</span><span class="p">:</span><span class="mi">00</span><span class="o">&gt;</span><span class="p">)</span>
+        <span class="p">}]</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>overwrite</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – Deletes all datapoints between the lowest and highest ts (a &gt;= x AND a &lt;= y),
+for each node_id and corresponding tag. Then inserts all the new datapoints.</p></li>
+<li><p><strong>silent</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – When set to true a call will only reply with status code 201 Created and an empty
+reply instead of 200 Success and the inserted rows. Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List[<a class="reference internal" href="../types/timeseries_types.html#evclient.types.timeseries_types.TimeseriesGroup" title="evclient.types.timeseries_types.TimeseriesGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeseriesGroup</span></code></a>] or None depending on if the <cite>silent</cite> param is set.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVUnexpectedStatusCodeException" title="evclient.exceptions.EVUnexpectedStatusCodeException"><strong>EVUnexpectedStatusCodeException</strong></a> – Unexpected status code received.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVBadRequestException" title="evclient.exceptions.EVBadRequestException"><strong>EVBadRequestException</strong></a> – Sent request had insufficient data or invalid options.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVUnauthorizedException" title="evclient.exceptions.EVUnauthorizedException"><strong>EVUnauthorizedException</strong></a> – Request was refused due to lacking authentication credentials.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVForbiddenException" title="evclient.exceptions.EVForbiddenException"><strong>EVForbiddenException</strong></a> – Server understands the request but refuses to authorize it.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVTooManyRequestsException" title="evclient.exceptions.EVTooManyRequestsException"><strong>EVTooManyRequestsException</strong></a> – Sent too many requests in a given amount of time.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVInternalServerException" title="evclient.exceptions.EVInternalServerException"><strong>EVInternalServerException</strong></a> – Server encountered an unexpected condition that prevented it
+    from fulfilling the request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="evclient.timeseries_client.TimeseriesClient.store_timeseries_data">
+<span class="sig-name descname"><span class="pre">store_timeseries_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime.datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">silent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../types/timeseries_types.html#evclient.types.timeseries_types.StoreTimeseriesData" title="evclient.types.timeseries_types.StoreTimeseriesData"><span class="pre">evclient.types.timeseries_types.StoreTimeseriesData</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#evclient.timeseries_client.TimeseriesClient.store_timeseries_data" title="Permalink to this definition"></a></dt>
+<dd><p>Store a single data point in a timeseries from EnergyView API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node_id</strong> (<em>int</em>) – Domain-unique id for the node.</p></li>
+<li><p><strong>tag</strong> (<em>str</em>) – The name of the tag / sensor as declared in EnergyView. Such as outdoortemp, indoortemp etc.</p></li>
+<li><p><strong>val</strong> (<em>float</em>) – The value to store.</p></li>
+<li><p><strong>ts</strong> (<em>datetime</em>) – The date time of the data point in the format YYYY-MM-DDThh:mm:ss±hh:mm.
+Without timezone information, the API will fall back to the time zone configured for the domain.</p></li>
+<li><p><strong>silent</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – Return None instead of the inserted content.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><a class="reference internal" href="../types/timeseries_types.html#evclient.types.timeseries_types.StoreTimeseriesData" title="evclient.types.timeseries_types.StoreTimeseriesData"><code class="xref py py-class docutils literal notranslate"><span class="pre">StoreTimeseriesData</span></code></a> or None depending on if the <cite>silent</cite> param is set.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVUnexpectedStatusCodeException" title="evclient.exceptions.EVUnexpectedStatusCodeException"><strong>EVUnexpectedStatusCodeException</strong></a> – Unexpected status code received.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVBadRequestException" title="evclient.exceptions.EVBadRequestException"><strong>EVBadRequestException</strong></a> – Sent request had insufficient data or invalid options.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVUnauthorizedException" title="evclient.exceptions.EVUnauthorizedException"><strong>EVUnauthorizedException</strong></a> – Request was refused due to lacking authentication credentials.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVForbiddenException" title="evclient.exceptions.EVForbiddenException"><strong>EVForbiddenException</strong></a> – Server understands the request but refuses to authorize it.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVTooManyRequestsException" title="evclient.exceptions.EVTooManyRequestsException"><strong>EVTooManyRequestsException</strong></a> – Sent too many requests in a given amount of time.</p></li>
+<li><p><a class="reference internal" href="../exceptions.html#evclient.exceptions.EVInternalServerException" title="evclient.exceptions.EVInternalServerException"><strong>EVInternalServerException</strong></a> – Server encountered an unexpected condition that prevented it
+    from fulfilling the request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
