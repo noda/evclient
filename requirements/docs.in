@@ -1,5 +1,6 @@
 -c pins.txt
+-c requirements.txt
+-r requirements.txt
 
-typing_extensions
 sphinx
 sphinx-rtd-theme

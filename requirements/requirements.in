@@ -3,5 +3,6 @@
 beartype
 requests
 pyRFC3339
-PyYAML
 python-dateutil
+PyYAML
+typing_extensions
