@@ -82,85 +82,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-evclient.types.tag_types">
-<span id="tag-types"></span><h1>Tag Types<a class="headerlink" href="#module-evclient.types.tag_types" title="Permalink to this headline"></a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="evclient.types.tag_types.TagResponse">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.types.tag_types.</span></span><span class="sig-name descname"><span class="pre">TagResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.types.tag_types.TagResponse" title="Permalink to this definition"></a></dt>
-<dd><dl class="py attribute">
-<dt class="sig sig-object py" id="evclient.types.tag_types.TagResponse.sensors">
-<span class="sig-name descname"><span class="pre">sensors</span></span><a class="headerlink" href="#evclient.types.tag_types.TagResponse.sensors" title="Permalink to this definition"></a></dt>
-<dd><p>Named wrapper attribute</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List[<a class="reference internal" href="#evclient.types.tag_types.TagType" title="evclient.types.tag_types.TagType">evclient.types.tag_types.TagType</a>]</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="evclient.types.tag_types.TagType">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">evclient.types.tag_types.</span></span><span class="sig-name descname"><span class="pre">TagType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#evclient.types.tag_types.TagType" title="Permalink to this definition"></a></dt>
-<dd><dl class="py attribute">
-<dt class="sig sig-object py" id="evclient.types.tag_types.TagType.id">
-<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#evclient.types.tag_types.TagType.id" title="Permalink to this definition"></a></dt>
-<dd><p>Domain-unique id of the sensor. A sensor (declaration) is usually assigned to multiple nodes.
-In a domain with thousands of Nodes there may only still be less then a hundred sensors.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="evclient.types.tag_types.TagType.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#evclient.types.tag_types.TagType.name" title="Permalink to this definition"></a></dt>
-<dd><p>Declared name of the sensor, used throughout the system. Only unique in combination with protocol_id.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="evclient.types.tag_types.TagType.description">
-<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#evclient.types.tag_types.TagType.description" title="Permalink to this definition"></a></dt>
-<dd><p>Human readable declaration of the sensor.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="evclient.types.tag_types.TagType.postfix">
-<span class="sig-name descname"><span class="pre">postfix</span></span><a class="headerlink" href="#evclient.types.tag_types.TagType.postfix" title="Permalink to this definition"></a></dt>
-<dd><p>May serve as the unit.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="evclient.types.tag_types.TagType.protocol_id">
-<span class="sig-name descname"><span class="pre">protocol_id</span></span><a class="headerlink" href="#evclient.types.tag_types.TagType.protocol_id" title="Permalink to this definition"></a></dt>
-<dd><p>Reference to a protocol. A protocol is a set of sensors acting as a declaration of ability.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+  <section id="tag-types">
+<h1>Tag Types<a class="headerlink" href="#tag-types" title="Permalink to this headline"></a></h1>
 </section>
 
 
