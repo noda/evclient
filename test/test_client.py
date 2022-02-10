@@ -37,6 +37,7 @@ class TestEVClient(unittest.TestCase):
             responses.add(
                 responses.GET,
                 url=f'{client._url}/{client._csv_import_api_path}',
+                json={'integrations': []},
                 status=200
             )
             client.get_csv_imports()
@@ -49,6 +50,7 @@ class TestEVClient(unittest.TestCase):
             responses.add(
                 responses.GET,
                 url=f'{client._url}/{client._dataset_api_path}',
+                json=[],
                 status=200
             )
             client.get_datasets()
@@ -61,6 +63,7 @@ class TestEVClient(unittest.TestCase):
             responses.add(
                 responses.GET,
                 url=f'{client._url}/{client._node_api_path}',
+                json={'nodes': []},
                 status=200
             )
             client.get_nodes()
@@ -73,6 +76,7 @@ class TestEVClient(unittest.TestCase):
             responses.add(
                 responses.GET,
                 url=f'{client._url}/{client._settings_api_path}/test/1?extract=0',
+                json={},
                 status=200
             )
             client.get_settings(settings_type='test', settings_id=1)
@@ -85,6 +89,7 @@ class TestEVClient(unittest.TestCase):
             responses.add(
                 responses.GET,
                 url=f'{client._url}/{client._tag_api_path}',
+                json={'sensors': []},
                 status=200
             )
             client.get_tags()
@@ -97,6 +102,7 @@ class TestEVClient(unittest.TestCase):
             responses.add(
                 responses.GET,
                 url=f'{client._url}/{client._timeseries_api_path}',
+                json={'timeseries': []},
                 status=200
             )
             client.get_timeseries_data()

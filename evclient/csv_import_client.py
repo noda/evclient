@@ -1,9 +1,15 @@
+from warnings import filterwarnings
+from typing import TextIO, Optional
+
 import requests
-from typing import TextIO
+from beartype import beartype
+from beartype.roar import BeartypeDecorHintPep585DeprecationWarning
 
 from .types.csv_import_types import CSVImportResponse
 from .base_client import BaseClient
 
+
+filterwarnings("ignore", category=BeartypeDecorHintPep585DeprecationWarning)
 Response = requests.models.Response
 
 
@@ -12,10 +18,16 @@ class CSVImportClient(BaseClient):
     A client for handling the csv import section of EnergyView API.
     """
 
-    def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None):
+    @beartype
+    def __init__(self,
+                 domain: Optional[str] = None,
+                 api_key: Optional[str] = None,
+                 endpoint_url: Optional[str] = None
+                 ) -> None:
         super().__init__(domain, api_key, endpoint_url)
         self._csv_import_api_path: str = 'csvimport'
 
+    @beartype
     def get_csv_imports(self) -> CSVImportResponse:
         """Fetches all existing csv import definitions from EnergyView API
 

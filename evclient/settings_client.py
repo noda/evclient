@@ -1,10 +1,14 @@
-from typing import Dict
+from warnings import filterwarnings
+from typing import Dict, Optional
 
 import requests
+from beartype import beartype
+from beartype.roar import BeartypeDecorHintPep585DeprecationWarning
 
 from .base_client import BaseClient
 from .utils import filter_none_values_from_dict
 
+filterwarnings("ignore", category=BeartypeDecorHintPep585DeprecationWarning)
 Response = requests.models.Response
 
 
@@ -13,15 +17,21 @@ class SettingsClient(BaseClient):
     A client for handling the settings / metadata section of EnergyView API.
     """
 
-    def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None):
+    @beartype
+    def __init__(self,
+                 domain: Optional[str] = None,
+                 api_key: Optional[str] = None,
+                 endpoint_url: Optional[str] = None
+                 ) -> None:
         super().__init__(domain, api_key, endpoint_url)
         self._settings_api_path: str = 'settings'
 
+    @beartype
     def get_settings(self,
                      settings_type: str,
                      settings_id: int,
-                     path: str = None,
-                     extract: bool = False
+                     path: Optional[str] = None,
+                     extract: Optional[bool] = False
                      ) -> Dict:
         """Fetches all settings / metadata of a resource from EnergyView API
 
@@ -76,12 +86,13 @@ class SettingsClient(BaseClient):
         )
         return self._process_response(response)
 
+    @beartype
     def store_settings(self,
                        settings_type: str,
                        settings_id: int,
                        path: str,
                        value: str,
-                       force: bool = False
+                       force: Optional[bool] = False
                        ) -> Dict[str, str]:
         """Store a value in settings / metadata of a resource from EnergyView API
 

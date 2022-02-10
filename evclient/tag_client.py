@@ -1,10 +1,14 @@
-from typing import List
+from warnings import filterwarnings
+from typing import List, Optional
 
 import requests
+from beartype import beartype
+from beartype.roar import BeartypeDecorHintPep585DeprecationWarning
 
 from .types.tag_types import TagResponse, TagType
 from .base_client import BaseClient
 
+filterwarnings("ignore", category=BeartypeDecorHintPep585DeprecationWarning)
 Response = requests.models.Response
 
 
@@ -13,10 +17,16 @@ class TagClient(BaseClient):
     A client for handling the tag / sensor section of EnergyView API.
     """
 
-    def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None):
+    @beartype
+    def __init__(self,
+                 domain: Optional[str] = None,
+                 api_key: Optional[str] = None,
+                 endpoint_url: Optional[str] = None
+                 ) -> None:
         super().__init__(domain, api_key, endpoint_url)
         self._tag_api_path: str = 'tags'
 
+    @beartype
     def get_tags(self) -> List[TagType]:
         """Fetches all tags / sensors from EnergyView API
 

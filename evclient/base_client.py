@@ -1,11 +1,13 @@
 import json.decoder
 import os
 import logging
+from warnings import filterwarnings
 from typing import Type, Dict, Optional, Any
 
 import yaml
 import requests
-
+from beartype import beartype
+from beartype.roar import BeartypeDecorHintPep585DeprecationWarning
 
 from .exceptions import (
     EVBadRequestException,
@@ -20,6 +22,7 @@ from .exceptions import (
     EVUnexpectedStatusCodeException,
 )
 
+filterwarnings("ignore", category=BeartypeDecorHintPep585DeprecationWarning)
 logger = logging.getLogger(__name__)
 Response = requests.models.Response
 
@@ -41,7 +44,12 @@ class BaseClient:
         429: EVTooManyRequestsException,
     }
 
-    def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None) -> None:
+    @beartype
+    def __init__(self,
+                 domain: Optional[str] = None,
+                 api_key: Optional[str] = None,
+                 endpoint_url: Optional[str] = None
+                 ) -> None:
         """BaseClient constructor
 
         Defines the base url and customer domain for the EnergyView API and sets headers in a new
@@ -92,6 +100,7 @@ class BaseClient:
 
         self._url: str = f'{self._base_url}/{self._domain}/{self._api_root}/{self._api_version}'
 
+    @beartype
     def _handle_successful_response(self, response: Response) -> Optional[Any]:
         if response.headers.get('content-type') == 'application/yaml':
             try:
@@ -103,6 +112,7 @@ class BaseClient:
         except json.decoder.JSONDecodeError:
             return response.content or None
 
+    @beartype
     def _process_response(self, response: Response) -> Optional[Any]:
         """Process the response from EnergyView API
 

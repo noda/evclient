@@ -1,12 +1,12 @@
 import json
 import datetime
+from warnings import filterwarnings
 from typing import List, Optional, Union
 
 import requests
 import pyrfc3339
 from beartype import beartype
 from beartype.roar import BeartypeDecorHintPep585DeprecationWarning
-from warnings import filterwarnings
 
 from .types.timeseries_types import (
     TimeseriesResponseGroup,
@@ -29,19 +29,24 @@ class TimeseriesClient(BaseClient):
     A client for handling the timeseries section of EnergyView API.
     """
 
-    def __init__(self, domain: str = None, api_key: str = None, endpoint_url: str = None):
+    @beartype
+    def __init__(self,
+                 domain: Optional[str] = None,
+                 api_key: Optional[str] = None,
+                 endpoint_url: Optional[str] = None
+                 ) -> None:
         super().__init__(domain, api_key, endpoint_url)
         self._timeseries_api_path: str = 'timeseries'
 
     @beartype
     def get_timeseries_data(self,
-                            node_ids: Union[int, List[int]] = None,
-                            tags: Union[str, List[str]] = None,
-                            start: datetime.datetime = None,
-                            end: datetime.datetime = None,
-                            resolution: str = None,
-                            aggregate: str = None,
-                            epoch: bool = False
+                            node_ids: Optional[Union[int, List[int]]] = None,
+                            tags: Optional[Union[str, List[str]]] = None,
+                            start: Optional[datetime.datetime] = None,
+                            end: Optional[datetime.datetime] = None,
+                            resolution: Optional[str] = None,
+                            aggregate: Optional[str] = None,
+                            epoch: Optional[bool] = False
                             ) -> List[TimeseriesGroup]:
         """Fetches all timeseries data from EnergyView API
 
@@ -165,7 +170,7 @@ class TimeseriesClient(BaseClient):
                               tag: str,
                               val: float,
                               ts: datetime.datetime,
-                              silent: bool = True
+                              silent: Optional[bool] = True
                               ) -> Optional[StoreTimeseriesData]:
         """Store a single data point in a timeseries from EnergyView API
 
@@ -175,7 +180,7 @@ class TimeseriesClient(BaseClient):
             val (float): The value to store.
             ts (datetime): The date time of the data point in the format YYYY-MM-DDThh:mm:ss±hh:mm.
                 Without timezone information, the API will fall back to the time zone configured for the domain.
-            silent (bool): Return None instead of the inserted content.
+            silent (Optional[bool]): Return None instead of the inserted content.
 
         Returns:
             :class:`.StoreTimeseriesData` or None depending on if the `silent` param is set.
@@ -212,8 +217,8 @@ class TimeseriesClient(BaseClient):
     @beartype
     def store_multiple_timeseries_data(self,
                                        timeseries: List[TimeseriesGroup],
-                                       overwrite: bool = False,
-                                       silent: bool = True,
+                                       overwrite: Optional[bool] = False,
+                                       silent: Optional[bool] = True,
                                        ) -> Optional[List[TimeseriesGroup]]:
         """Store multiple data points in multiple timeseries from EnergyView API
 
