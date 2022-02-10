@@ -114,7 +114,10 @@ tomli==1.2.3
 tox==3.24.5
     # via -r dev.in
 typing-extensions==4.0.1
-    # via importlib-metadata
+    # via
+    #   -c requirements.txt
+    #   -r requirements.txt
+    #   importlib-metadata
 urllib3==1.26.8
     # via
     #   -c requirements.txt
