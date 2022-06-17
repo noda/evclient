@@ -47,10 +47,6 @@ pyrfc3339==1.1
     # via
     #   -c requirements.txt
     #   -r requirements.txt
-python-dateutil==2.8.2
-    # via
-    #   -c requirements.txt
-    #   -r requirements.txt
 pytz==2021.3
     # via
     #   -c requirements.txt
@@ -66,11 +62,6 @@ requests==2.27.1
     #   -c requirements.txt
     #   -r requirements.txt
     #   sphinx
-six==1.16.0
-    # via
-    #   -c requirements.txt
-    #   -r requirements.txt
-    #   python-dateutil
 snowballstemmer==2.2.0
     # via sphinx
 sphinx==4.3.2
